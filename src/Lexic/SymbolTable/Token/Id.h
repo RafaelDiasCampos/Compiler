@@ -3,6 +3,14 @@
 
 class TokenId : public Token {
     public:
-    TokenId(std::string id) : Token(TokenType::ID), id(id) {}
-    std::string id;
+    enum IdType {
+        INT,
+        FLOAT,
+        CHAR,
+        STRING
+    };
+    TokenId(const std::string id) : Token(TokenType::ID), id(id) {}
+
+    const std::string id;
+    std::unique_ptr<Token> value;
 };
