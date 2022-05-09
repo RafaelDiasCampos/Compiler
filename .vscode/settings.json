@@ -1,0 +1,8 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "cmake.debugConfig": {        
+        "args": [
+            "${workspaceFolder}/tests/test.txt"
+        ]
+    }
+}

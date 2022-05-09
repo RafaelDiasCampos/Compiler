@@ -1,0 +1,4 @@
+#define Compiler_VERSION_MAJOR @CompilerNAME_VERSION_MAJOR@
+#define Compiler_VERSION_MINOR @CompilerNAME_VERSION_MINOR@
+
+#include <iostream>

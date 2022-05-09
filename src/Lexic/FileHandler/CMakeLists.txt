@@ -1,0 +1,1 @@
+add_library(FileHandler SHARED FileHandler.cpp)
