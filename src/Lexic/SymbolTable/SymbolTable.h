@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <memory>
 
-#include "Token/Id.h"
+#include "../Token/Id.h"
 
 typedef std::unordered_map< std::string, std::unique_ptr<Token> >::const_iterator SymbolTableIt;
 

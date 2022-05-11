@@ -55,6 +55,7 @@ class Token {
         // Others
         END_OF_FILE,
         INVALID_TOKEN,
+        ERROR,
 
         // End of tokens
         TOKENS_END
@@ -111,6 +112,7 @@ std::ostream & operator<<(std::ostream & Str, Token const & v) {
 
     token_type_to_name[Token::END_OF_FILE] = "EOF";
     token_type_to_name[Token::INVALID_TOKEN] = "invalid token";
+    token_type_to_name[Token::ERROR] = "error";
 
     token_type_to_name[Token::ID] = "id";  
 

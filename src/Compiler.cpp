@@ -1,16 +1,11 @@
 #include <iostream>
-#include "Lexic/FileHandler/FileHandler.h"
-
+#include "Lexic/Lexic.h"
 
 void test(std::string filename){
 
-    FileHandler handler(filename);
-    char c;
-    while (handler.getNextChar(c)){
-        std::cout << c;
-        handler.putback();
-    }
-    std::cout << std::endl;
+    LexicAnalyzer lex(filename);
+    Token* tok = lex.getNextToken();
+    std::cout << tok << std::endl;
 }
 
 int main(int argc, const char** argv) {
@@ -18,7 +13,9 @@ int main(int argc, const char** argv) {
         std::cout << "Usage: " << argv[0] << " <filename>" << std::endl;
         return 1;
     }
+
     std::string filename = std::string(argv[1]);
+    std::cout << "Starting LexicAnalyzer with file " << filename << std::endl;
     test(filename);
     return 0;
 }
