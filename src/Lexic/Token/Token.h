@@ -42,6 +42,8 @@ class Token {
         // Special
         OPEN_BRACES,
         CLOSE_BRACES,
+        SEMICOLON,
+        COMMA,
 
         // Constants
         CONST_INT,
@@ -62,13 +64,14 @@ class Token {
     };
     
     Token(const TokenType token_type) : token_type(token_type) {}
+    std::string to_string();
 
-    static const int n_tokens = TokenType::TOKENS_END - 1;
+    static const int n_tokens = TokenType::TOKENS_END;
 
     const TokenType token_type;
 };
 
-std::ostream & operator<<(std::ostream & Str, Token const & v) {
+inline std::string Token::to_string() {
     std::array<std::string, Token::n_tokens> token_type_to_name;
     token_type_to_name[Token::ROUTINE] = "routine";
     token_type_to_name[Token::BEGIN] = "begin";
@@ -104,6 +107,8 @@ std::ostream & operator<<(std::ostream & Str, Token const & v) {
 
     token_type_to_name[Token::OPEN_BRACES] = "(";
     token_type_to_name[Token::CLOSE_BRACES] = ")";
+    token_type_to_name[Token::SEMICOLON] = ";";
+    token_type_to_name[Token::COMMA] = ",";
 
     token_type_to_name[Token::CONST_INT] = "const int";
     token_type_to_name[Token::CONST_FLOAT] = "const float";
@@ -116,6 +121,5 @@ std::ostream & operator<<(std::ostream & Str, Token const & v) {
 
     token_type_to_name[Token::ID] = "id";  
 
-    Str << std::string("Token ") << token_type_to_name[v.token_type];
-    return Str;
+    return "Token " + token_type_to_name[token_type];
 }

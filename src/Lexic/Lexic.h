@@ -8,6 +8,10 @@
 
 #include "Token/Id.h"
 #include "Token/ValueType/ValueType.h"
+#include "Token/ValueType/ConstChar.h"
+#include "Token/ValueType/ConstFloat.h"
+#include "Token/ValueType/ConstInt.h"
+#include "Token/ValueType/ConstString.h"
 
 class LexicAnalyzer {
     public:
@@ -18,6 +22,11 @@ class LexicAnalyzer {
 
     private:
     void createBasicTokens();
+    void initializeSymbolTable();
+
+    Token* parseNumericConst();
+    Token* parseStringConst();
+    Token* parseIdentifier();
     
     FileHandler handler;
     SymbolTable table;

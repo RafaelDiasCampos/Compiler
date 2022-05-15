@@ -1,7 +1,9 @@
 #include "Lexic.h"
+#include <memory>
 
 LexicAnalyzer::LexicAnalyzer(std::string filename) : handler(filename) {
      createBasicTokens();
+     initializeSymbolTable();
 }
 
 void LexicAnalyzer::createBasicTokens() {
@@ -39,6 +41,8 @@ void LexicAnalyzer::createBasicTokens() {
 
     basic_tokens[Token::OPEN_BRACES] = std::make_unique<Token>(Token::OPEN_BRACES);
     basic_tokens[Token::CLOSE_BRACES] = std::make_unique<Token>(Token::CLOSE_BRACES);
+    basic_tokens[Token::SEMICOLON] = std::make_unique<Token>(Token::SEMICOLON);
+    basic_tokens[Token::COMMA] = std::make_unique<Token>(Token::COMMA);
 
     basic_tokens[Token::CONST_INT] = std::make_unique<Token>(Token::ERROR);
     basic_tokens[Token::CONST_FLOAT] = std::make_unique<Token>(Token::ERROR);
@@ -52,6 +56,153 @@ void LexicAnalyzer::createBasicTokens() {
     basic_tokens[Token::ID] = std::make_unique<Token>(Token::ERROR); 
 }
 
+void LexicAnalyzer::initializeSymbolTable () {
+    table.insertSymbol("routine", std::make_unique<Token>(Token::ROUTINE));
+    table.insertSymbol("begin", std::make_unique<Token>(Token::BEGIN));
+    table.insertSymbol("end", std::make_unique<Token>(Token::END));
+    table.insertSymbol("declare", std::make_unique<Token>(Token::DECLARE));
+    table.insertSymbol("int", std::make_unique<Token>(Token::INT));
+    table.insertSymbol("float", std::make_unique<Token>(Token::FLOAT));
+    table.insertSymbol("char", std::make_unique<Token>(Token::CHAR));
+    table.insertSymbol("if", std::make_unique<Token>(Token::IF));
+    table.insertSymbol("then", std::make_unique<Token>(Token::THEN));
+    table.insertSymbol("else", std::make_unique<Token>(Token::ELSE));
+    table.insertSymbol("repeat", std::make_unique<Token>(Token::REPEAT));
+    table.insertSymbol("until", std::make_unique<Token>(Token::UNTIL));
+    table.insertSymbol("while", std::make_unique<Token>(Token::WHILE));
+    table.insertSymbol("do", std::make_unique<Token>(Token::DO));
+    table.insertSymbol("read", std::make_unique<Token>(Token::READ));
+    table.insertSymbol("write", std::make_unique<Token>(Token::WRITE));
+    table.insertSymbol("not", std::make_unique<Token>(Token::NOT));
+    table.insertSymbol("or", std::make_unique<Token>(Token::OR));
+    table.insertSymbol("and", std::make_unique<Token>(Token::AND));
+}
+
 Token* LexicAnalyzer::getNextToken() {
-    return basic_tokens[Token::IF].get();
+    char c;
+    while (handler.getNextChar(c)) {
+        switch (c) {
+            case ' ':
+            case '\n':
+            case '\t': continue;
+
+            case '%': while (handler.getNextChar(c) && c != '%') {}
+                if (c == '%') {
+                    continue;
+                }
+                return basic_tokens[Token::INVALID_TOKEN].get();
+
+
+            case '(': return basic_tokens[Token::OPEN_BRACES].get();
+            case ')': return basic_tokens[Token::CLOSE_BRACES].get();
+            case ';': return basic_tokens[Token::SEMICOLON].get();
+            case ',': return basic_tokens[Token::COMMA].get();
+            case '+': return basic_tokens[Token::ADD].get();
+            case '-': return basic_tokens[Token::SUB].get();
+            case '*': return basic_tokens[Token::MUL].get();
+            case '/': return basic_tokens[Token::DIV].get();
+            case '=': return basic_tokens[Token::ASSIGN].get();
+            case '>': handler.getNextChar(c);
+                if (c == '=') return basic_tokens[Token::COMP_GE].get();
+                else {handler.putback(); return basic_tokens[Token::COMP_GT].get();}
+            case '<': handler.getNextChar(c);
+                if (c == '=') return basic_tokens[Token::COMP_LE].get();
+                else if (c == '>') return basic_tokens[Token::COMP_NE].get();
+                else {handler.putback(); return basic_tokens[Token::COMP_LT].get();}
+            case ':': handler.getNextChar(c);
+                if (c == '=') return basic_tokens[Token::ASSIGN].get();
+                else {handler.putback(); return basic_tokens[Token::INVALID_TOKEN].get();}
+
+
+            case '\'': char char_value; handler.getNextChar(char_value);
+                if (handler.getNextChar(c) && c == '\'') {
+                    value_tokens.insert(value_tokens.end(), std::make_unique<TokenConstChar>(char_value));
+                    return value_tokens.back().get();
+                }
+                else {
+                    handler.putback();
+                    return basic_tokens[Token::INVALID_TOKEN].get();
+                }
+            case '"': return parseStringConst();
+        }
+
+        if (std::isdigit(c)) {
+            handler.putback(); 
+            return parseNumericConst();
+        }
+
+        if (std::isalpha(c)) {
+            handler.putback();
+            return parseIdentifier();
+        }
+
+        return basic_tokens[Token::INVALID_TOKEN].get();
+    }
+
+    return basic_tokens[Token::END_OF_FILE].get();
+}
+
+Token* LexicAnalyzer::parseNumericConst() {
+    uint32_t integer_part = 0;
+
+    char c;
+    while (handler.getNextChar(c)) {
+        if (std::isdigit(c)) {
+            integer_part = integer_part * 10 + (c - '0');
+        } else {
+            handler.putback();
+            break;
+        }
+    }
+
+    if (c == '.') {
+        uint32_t float_part = 0.0f;
+        uint32_t power = 10;
+
+        while (handler.getNextChar(c)) {
+            if (std::isdigit(c)) {
+                float_part = float_part * 10 + (c - '0');
+                power *= 10;
+            } else {
+                handler.putback();
+                break;
+            }
+        }
+
+        float float_value = integer_part + ((float) float_part / power);
+
+        value_tokens.insert(value_tokens.end(), std::make_unique<TokenConstFloat>(float_value));
+        return value_tokens.back().get();
+    }
+    
+    value_tokens.insert(value_tokens.end(), std::make_unique<TokenConstInt>(integer_part));
+    return value_tokens.back().get();
+}
+
+Token* LexicAnalyzer::parseStringConst() {
+    std::string string_value;
+
+    char c;
+    while (handler.getNextChar(c) && c != '"') {
+        string_value += c;
+    }
+    
+    value_tokens.insert(value_tokens.end(), std::make_unique<TokenConstString>(string_value));
+    return value_tokens.back().get();
+}
+
+Token* LexicAnalyzer::parseIdentifier() {
+    std::string id;
+    char c;
+
+    while (handler.getNextChar(c)) {
+        if (std::isalnum(c)) {
+            id += c;
+        } else {
+            handler.putback();
+            break;
+        }
+    }
+
+    return table.insertId(id);
 }

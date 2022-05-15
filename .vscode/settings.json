@@ -2,7 +2,7 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "cmake.debugConfig": {        
         "args": [
-            "${workspaceFolder}/tests/test.txt"
+            "${workspaceFolder}/tests/1/fixed.txt"
         ]
     },
     "cmake.configureOnOpen": true,

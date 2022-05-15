@@ -13,7 +13,7 @@ Token* SymbolTable::insertSymbol(std::string id, std::unique_ptr<Token> token) {
 }
 
 Token* SymbolTable::insertId(std::string id) {
-    std::unique_ptr<Token> token = std::make_unique<Token>(TokenId(id));
+    std::unique_ptr<Token> token = std::make_unique<TokenId>(TokenId(id));
 
     Token* tokenInserted = insertSymbol(id, std::move(token));
 
