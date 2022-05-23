@@ -5,11 +5,11 @@
 class TokenConstFloat : public ValueType {
     public:
     TokenConstFloat(const float value) : ValueType(TokenType::CONST_FLOAT), value(value) {}
-    std::string to_string();
+    virtual const std::string to_string() const;
 
     const float value;
 };
 
-inline std::string TokenConstFloat::to_string() {
+inline const std::string TokenConstFloat::to_string() const {
     return Token::to_string() + ". Value: " + std::to_string(value);
 }

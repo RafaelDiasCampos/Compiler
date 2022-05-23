@@ -1,4 +1,5 @@
 #include "FileHandler.h"
+#include <stdint.h>
 
 FileHandler::FileHandler(std::string filename) {
     file = std::ifstream(filename);
@@ -13,6 +14,11 @@ bool FileHandler::getNextChar(char &c) {
 
     c = last_read;
     if (file) {
+        file_position.column_number++;
+        if (c == '\n') {
+            file_position.line_number++;
+            file_position.column_number = 1;
+        }
         return true;
     } else {
         return false;
@@ -21,4 +27,12 @@ bool FileHandler::getNextChar(char &c) {
 
 void FileHandler::putback() {
     file.putback(last_read);
+    file_position.column_number--;
+    if (last_read == '\n') {
+        file_position.line_number--;
+    }
+}
+
+const FilePosition FileHandler::getFilePosition() const {
+    return file_position;
 }

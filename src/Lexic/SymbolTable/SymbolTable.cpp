@@ -4,7 +4,7 @@ SymbolTable::SymbolTable() {
 
 }
 
-Token* SymbolTable::insertSymbol(std::string id, std::unique_ptr<Token> token) {
+Token*  SymbolTable::insertSymbol(std::string id, std::unique_ptr<Token> token) {
     std::pair<SymbolTableIt, bool> result = table.insert({id, std::move(token)});
 
     Token* tokenInserted = result.first->second.get();

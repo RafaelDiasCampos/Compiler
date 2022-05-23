@@ -4,11 +4,11 @@
 class TokenConstChar : public ValueType {
     public:
     TokenConstChar(const char value) : ValueType(TokenType::CONST_CHAR), value(value) {}
-    std::string to_string();
+    virtual const std::string to_string() const;
 
     const char value;
 };
 
-inline std::string TokenConstChar::to_string() {
+inline const std::string TokenConstChar::to_string() const {
     return Token::to_string() + ". Value: '" + value + "'";
 }

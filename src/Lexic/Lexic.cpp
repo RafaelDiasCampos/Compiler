@@ -6,6 +6,10 @@ LexicAnalyzer::LexicAnalyzer(std::string filename) : handler(filename) {
      initializeSymbolTable();
 }
 
+const FilePosition LexicAnalyzer::getFilePosition() const {
+    return handler.getFilePosition();
+}
+
 void LexicAnalyzer::createBasicTokens() {
     basic_tokens[Token::ROUTINE] = std::make_unique<Token>(Token::ROUTINE);
     basic_tokens[Token::BEGIN] = std::make_unique<Token>(Token::BEGIN);

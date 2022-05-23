@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <cstdint>
 #include <vector>
 
 #include "FileHandler/FileHandler.h"
@@ -19,6 +20,8 @@ class LexicAnalyzer {
     ~LexicAnalyzer() {}
 
     Token* getNextToken();
+
+    const FilePosition getFilePosition() const;
 
     private:
     void createBasicTokens();

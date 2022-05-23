@@ -64,14 +64,19 @@ class Token {
     };
     
     Token(const TokenType token_type) : token_type(token_type) {}
-    std::string to_string();
+    virtual const std::string to_string() const;
 
-    static const int n_tokens = TokenType::TOKENS_END;
+    static const uint16_t n_tokens = TokenType::TOKENS_END;
 
     const TokenType token_type;
 };
 
-inline std::string Token::to_string() {
+inline std::ostream & operator<<(std::ostream & Str, Token const & v) { 
+  Str << v.to_string();
+  return Str;
+}
+
+inline const std::string Token::to_string() const {
     std::array<std::string, Token::n_tokens> token_type_to_name;
     token_type_to_name[Token::ROUTINE] = "routine";
     token_type_to_name[Token::BEGIN] = "begin";

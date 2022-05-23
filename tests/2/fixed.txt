@@ -1,7 +1,9 @@
 routine
 
+declare
+
 int a, b, c;
-float d, _var
+float d, var
 
 begin
 
