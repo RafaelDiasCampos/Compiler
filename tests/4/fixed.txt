@@ -20,9 +20,9 @@ Processamento
 
 while (pontuacao>0 and (pontuacao<=pontuacaoMaxima)) do
     if ((pontuacao > pontuacaoMinima) and (disponibilidade=1)) then
-        write("Candidato aprovado.")
+        write("Candidato aprovado.");
     else
-        write("Candidato reprovado.")
+        write("Candidato reprovado.");
     end
     write("Pontuacao do candidato: ");
     read(pontuacao);

@@ -1,0 +1,34 @@
+routine
+
+declare
+
+int qtd, currentNum, currentDiv, divResulMod, isPrime;
+float divResul;
+
+begin
+
+write("Quantos numeros deseja verificar?");
+read(qtd);
+
+write("Numeros primos: ");
+
+currentNum := 2;
+while (qtd > 0) do
+    qtd := qtd - 1;
+    currentNum := currentNum + 1;
+    currentDiv := 2;
+    isPrime := 0;
+
+    repeat
+        divResul := currentNum /currentDiv;
+
+        divResulMod := divResul;
+
+        if (divResul * currentDiv <> currentNum) then
+            isPrime := 1;
+        end
+
+    until ( (currentDiv > currentNum / 2) and (isPrime = 1))
+
+    if (isPrime = 0) then
+        write(currentNum);

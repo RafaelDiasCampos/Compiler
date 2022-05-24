@@ -16,8 +16,8 @@ if (a<>b) then
         b := a;
         a := aux;
     end
-    write(a;
-    write(b)
+    write(a);
+    write(b);
 else
     write("Numeros iguais.");
 
