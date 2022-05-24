@@ -160,8 +160,9 @@ Token* LexicAnalyzer::parseNumericConst() {
     }
 
     if (c == '.') {
+        handler.getNextChar(c); // Flushes the '.' read
         uint32_t float_part = 0.0f;
-        uint32_t power = 10;
+        uint32_t power = 1;
 
         while (handler.getNextChar(c)) {
             if (std::isdigit(c)) {
@@ -173,7 +174,7 @@ Token* LexicAnalyzer::parseNumericConst() {
             }
         }
 
-        float float_value = integer_part + ((float) float_part / power);
+        double float_value = integer_part + ((double) float_part / power);
 
         value_tokens.insert(value_tokens.end(), std::make_unique<TokenConstFloat>(float_value));
         return value_tokens.back().get();
@@ -209,4 +210,11 @@ Token* LexicAnalyzer::parseIdentifier() {
     }
 
     return table.insertId(id);
+}
+
+const std::string LexicAnalyzer::to_string() const {
+    std::stringstream ss;
+    ss << "LexicAnalyzer: " << std::endl;
+    ss << table.to_string();
+    return ss.str();
 }

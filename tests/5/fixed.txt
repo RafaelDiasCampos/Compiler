@@ -1,6 +1,8 @@
+routine
+
 declare
 
-integer a, b, c, maior;
+int a, b, c, maior;
 char outro;
 
 begin
@@ -12,7 +14,7 @@ repeat
     read(b);
     write("C: ");
     read(c);
-    if ( (a>b) and (a>c) ) end
+    if ( (a>b) and (a>c) ) then
         maior := a
     else
         if (b>c) then
@@ -21,10 +23,10 @@ repeat
             maior := c
         end
     end
-    write("Maior valor:"");
+    write("Maior valor:");
     write (maior);
     write ("Outro? (S/N)");
     read(outro);
-until (outro = 'N' || outro = 'n)
+until (outro = 'N' or outro = 'n')
 
 end

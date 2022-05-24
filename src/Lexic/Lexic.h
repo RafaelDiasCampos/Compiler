@@ -23,6 +23,8 @@ class LexicAnalyzer {
 
     const FilePosition getFilePosition() const;
 
+    const std::string to_string() const;
+
     private:
     void createBasicTokens();
     void initializeSymbolTable();
@@ -34,6 +36,11 @@ class LexicAnalyzer {
     FileHandler handler;
     SymbolTable table;
     std::array< std::unique_ptr<Token>, Token::n_tokens > basic_tokens;
-    std::vector< std::unique_ptr<Token> > value_tokens;
+    std::vector< std::unique_ptr<ValueType> > value_tokens;
 
 };
+
+inline std::ostream & operator<<(std::ostream & Str, LexicAnalyzer const & v) { 
+  Str << v.to_string();
+  return Str;
+}

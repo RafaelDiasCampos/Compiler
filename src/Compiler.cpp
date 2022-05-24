@@ -12,6 +12,10 @@ void testLexic(std::string filename){
             std::cout << *token << std::endl;
         }
     }
+
+    std::cout << std::endl;
+    
+    std::cout << lex;
 }
 
 int main(int argc, const char** argv) {

@@ -78,6 +78,7 @@ inline std::ostream & operator<<(std::ostream & Str, Token const & v) {
 
 inline const std::string Token::to_string() const {
     std::array<std::string, Token::n_tokens> token_type_to_name;
+    
     token_type_to_name[Token::ROUTINE] = "routine";
     token_type_to_name[Token::BEGIN] = "begin";
     token_type_to_name[Token::END] = "end";

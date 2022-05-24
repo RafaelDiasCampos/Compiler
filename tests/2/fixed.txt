@@ -9,10 +9,10 @@ begin
 
 read (a);
 b := a * a;
-c := b + a/2 * (35/b); %aplica formula
+c := b + a/2 * (35/b); %aplica formula%
 write c;
 val := 34.2
-c = val + 2. + a;
+c = val + 2.0 + a;
 write (val)
 
 end
