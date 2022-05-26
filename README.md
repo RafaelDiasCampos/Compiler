@@ -22,7 +22,7 @@ cmake --build .
 ## Usage
 
 ```
-
+./Compiler file
 ```
 ## Language Specification
 This language supports the following features:
