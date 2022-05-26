@@ -1,0 +1,95 @@
+Token routine
+Token declare
+Token int
+Token id. Name: qtd
+Token ,
+Token id. Name: currentNum
+Token ,
+Token id. Name: lastNum
+Token ;
+Token begin
+Token write
+Token (
+Token const string. Value: "Quantos numeros deseja imprimir?"
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: qtd
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "Sequencia de Fibonacci: "
+Token )
+Token ;
+Token id. Name: currentNum
+Token :=
+Token const int. Value: 1
+Token ;
+Token id. Name: lastNum
+Token :=
+Token const int. Value: 1
+Token ;
+Token while
+Token (
+Token id. Name: qtd
+Token >
+Token const int. Value: 0
+Token )
+Token do
+Token id. Name: qtd
+Token :=
+Token id. Name: qtd
+Token -
+Token const int. Value: 2
+Token ;
+Token write
+Token (
+Token id. Name: lastNum
+Token )
+Token ;
+Token id. Name: wrtie
+Token (
+Token id. Name: currentNum
+Token )
+Token ;
+Token id. Name: lastNum
+Token :=
+Token id. Name: currentNum
+Token +
+Token id. Name: lastNum
+Token ;
+Token id. Name: currentNum
+Token :=
+Token id. Name: lastNum
+Token +
+Token id. Name: currentNum
+Token ;
+Token end
+
+LexicAnalyzer: 
+SymbolTable: 
+and: Token and
+or: Token or
+write: Token write
+wrtie: Token id. Name: wrtie
+qtd: Token id. Name: qtd
+int: Token int
+while: Token while
+declare: Token declare
+read: Token read
+end: Token end
+routine: Token routine
+until: Token until
+repeat: Token repeat
+begin: Token begin
+currentNum: Token id. Name: currentNum
+float: Token float
+do: Token do
+char: Token char
+if: Token if
+lastNum: Token id. Name: lastNum
+then: Token then
+not: Token not
+else: Token else

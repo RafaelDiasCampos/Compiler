@@ -1,0 +1,27 @@
+\chapter{Introdução}
+\label{cap:intro}
+Antes de se dar início a este trabalho, a professora Kecia Marques definiu a especificação de uma linguagem de programação para ser utilizada. A linguagem escolhida foi criada para este trabalho, e não retrata uma linguagem pré-existente.
+
+A partir dessa especificação, foi primeiramente desenvolvido um Analisador Léxico para a linguagem, que é capaz de ler um arquivo fonte e emitir uma sequência de tokens.
+
+Em seguida, foi desenvolvido um Analisador Sintático, que receberá os tokens provenientes do Analisador Léxico e irá produzir uma árvore de derivação para o arquivo fonte, com base na gramática definida para a linguagem.
+
+Na próxima etapa, foi feita a criação de um Analisador Semântico, responsável por validar a árvore de derivação produzida pelo Analisador Sintático.
+
+Finalmente, foi realizado um Gerador de Código, que recebe a árvore de derivação produzida pelo Analisador Sintático e validada pelo Analisador Semântico e produz seu código Assembly correspondente.
+
+Além do processo de desenvolvimento dos módulos do compilador, esse trabalho também apresenta os resultados dos testes de validação realizados em cada etapa.
+
+\section{Motivação}
+\label{sec:motivacao}
+
+Este trabalho foi realizado para colocar em prática os conhecimentos aprendidos em sala durante a disciplina de Compiladores.
+
+Além disso, ele oferece uma introdução ao desenvolvimento de um Compilador para uma linguagem arbitrária e pode ser útil para o desenvolvimento de projetos similares no futuro.
+
+\section{Objetivos}
+\label{sec:objetivos}
+
+O objetivo principal deste trabalho é produzir um compilador capaz de reconhecer a linguagem definida pela professora, e gerar o código correspondente.
+
+Como objetivo secundário, foi escolhida a implementação de recuperação de erro, que possibilite a exibição de todos os erros presentes no código fonte com uma única execução do compilador.

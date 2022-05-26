@@ -105,7 +105,7 @@ Token* LexicAnalyzer::getNextToken() {
             case '-': return basic_tokens[Token::SUB].get();
             case '*': return basic_tokens[Token::MUL].get();
             case '/': return basic_tokens[Token::DIV].get();
-            case '=': return basic_tokens[Token::ASSIGN].get();
+            case '=': return basic_tokens[Token::COMP_EQ].get();
             case '>': handler.getNextChar(c);
                 if (c == '=') return basic_tokens[Token::COMP_GE].get();
                 else {handler.putback(); return basic_tokens[Token::COMP_GT].get();}
@@ -172,6 +172,11 @@ Token* LexicAnalyzer::parseNumericConst() {
                 handler.putback();
                 break;
             }
+        }
+
+        // Missing digits after the '.'
+        if (power == 1) {
+            return basic_tokens[Token::INVALID_TOKEN].get();
         }
 
         double float_value = integer_part + ((double) float_part / power);

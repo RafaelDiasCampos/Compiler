@@ -1,6 +1,6 @@
 add_subdirectory(Lexic)
 
-add_executable(CompilerNAME Compiler.cpp)
+add_executable(Compiler Compiler.cpp)
 
-target_link_libraries(CompilerNAME PRIVATE Lexic)
+target_link_libraries(Compiler PRIVATE Lexic)
 configure_file(Compiler.h.in Compiler.h)

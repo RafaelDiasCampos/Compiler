@@ -82,7 +82,7 @@ inline const std::string Token::to_string() const {
     token_type_to_name[Token::ROUTINE] = "routine";
     token_type_to_name[Token::BEGIN] = "begin";
     token_type_to_name[Token::END] = "end";
-    token_type_to_name[Token::DECLARE] = "delcare";
+    token_type_to_name[Token::DECLARE] = "declare";
     token_type_to_name[Token::INT] = "int";
     token_type_to_name[Token::FLOAT] = "float";
     token_type_to_name[Token::CHAR] = "char";

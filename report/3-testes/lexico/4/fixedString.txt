@@ -1,0 +1,135 @@
+Token routine
+Token declare
+Token int
+Token id. Name: pontuacao
+Token ,
+Token id. Name: pontuacaoMaxina
+Token ,
+Token id. Name: disponibilidade
+Token ;
+Token char
+Token id. Name: pontuacaoMinima
+Token ;
+Token begin
+Token id. Name: pontuacaoMinima
+Token =
+Token const int. Value: 50
+Token ;
+Token id. Name: pontuacaoMaxima
+Token =
+Token const int. Value: 100
+Token ;
+Token write
+Token (
+Token const string. Value: "Pontuacao do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: pontuacao
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "Disponibilidade do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: disponibilidade
+Token )
+Token ;
+Token while
+Token (
+Token id. Name: pontuacao
+Token >
+Token const int. Value: 0
+Token and
+Token (
+Token id. Name: pontuacao
+Token <=
+Token id. Name: pontuacaoMaxima
+Token )
+Token do
+Token if
+Token (
+Token (
+Token id. Name: pontua
+Invalid token at position (22, 17)
+Invalid token at position (22, 18)
+Invalid token at position (22, 19)
+Invalid token at position (22, 20)
+Token id. Name: o
+Token >
+Token id. Name: pontuacaoMinima
+Token )
+Token and
+Token (
+Token id. Name: disponibilidade
+Token =
+Token const int. Value: 1
+Token )
+Token )
+Token then
+Token write
+Token (
+Token const string. Value: "Candidato aprovado."
+Token )
+Token else
+Token write
+Token (
+Token const string. Value: "Candidato reprovado."
+Token )
+Token end
+Token write
+Token (
+Token const string. Value: "Pontuacao do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: pontuacao
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "Disponibilidade do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: disponibilidade
+Token )
+Token ;
+Token end
+Token ;
+Token end
+
+LexicAnalyzer: 
+SymbolTable: 
+pontua: Token id. Name: pontua
+pontuacaoMaxima: Token id. Name: pontuacaoMaxima
+else: Token else
+not: Token not
+then: Token then
+if: Token if
+char: Token char
+float: Token float
+pontuacao: Token id. Name: pontuacao
+begin: Token begin
+o: Token id. Name: o
+repeat: Token repeat
+until: Token until
+routine: Token routine
+end: Token end
+pontuacaoMaxina: Token id. Name: pontuacaoMaxina
+do: Token do
+read: Token read
+declare: Token declare
+int: Token int
+write: Token write
+or: Token or
+while: Token while
+and: Token and
+disponibilidade: Token id. Name: disponibilidade
+pontuacaoMinima: Token id. Name: pontuacaoMinima

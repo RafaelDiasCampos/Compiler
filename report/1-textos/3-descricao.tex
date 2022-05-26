@@ -1,0 +1,107 @@
+\chapter{Descrição da Linguagem}
+\label{cap:descricaoLinguagem}
+
+\section{Gramática}
+\label{sec:gramatica}
+
+A linguagem foi definida pela seguinte Gramática Livre de Contexto (em notação BNF):
+
+\begin{grammar}
+
+<statement> ::= <ident> `=' <expr>
+
+<program> ::= <a> `=' `routine' body
+
+<body> ::= [<decl-list>] `begin' <stmt-list> `end'
+
+<decl-list> ::= `declare' <decl> `;' {<decl> `;'}
+
+<decl> ::= `declare' <decl> `;' {<decl> `;'}
+
+<ident-list> ::= <identifier> {`;' <identifier>}
+
+<type> ::= `int` | `float' | `char'
+
+<stmt-list> ::= <stmt> {`;' <stmt>}
+
+<stmt> ::= <assign-stmt> | <if-stmt> | <while-stmt> | <repeat-stmt> | <read-stmt> | <write-stmt>
+
+<assign-stmt> ::= <identifier> `:=' <simple-expr>
+
+<if-stmt> ::= `if' <condition> `then' <stmt-list> `end'
+              \alt `if' <condition> `then' <stmt-list> `else' <stmt-list> `end'
+              
+<condition> : <expression>
+
+<repeat-stmt> ::= `repeat' <stmt-list> <stmt-suffix>
+
+<stmt-suffix> ::= `until' <condition>
+
+<while-stmt> ::= <stmt-prefix> <stmt-list> `end'
+
+<stmt-prefix> ::= `while' <condition> `do'
+
+<read-stmt> ::= `read' `(' <identifier> `)'
+
+<write-stmt> ::= `write` `(` <writable> `)'
+
+<writable> ::= <simple-expr> | <literal>
+
+<expression> ::= <simple-expr> | <simple-expr> <relop> <simple-expr>
+
+<simple-expr> ::= <term> | <simple-expr> <addop> <term>
+
+<term> ::= <factor-a> | <term> <mulop> <factor-a>
+
+<fator-a> ::= <factor> | `not' <factor> | `-' <factor>
+
+<factor> ::= <identifier> | <constant> | `(' <expression> `)'
+
+<relop> ::= `=' | `>' | `>=' | `<' | `<=' | `<>'
+
+<addop> ::= `+' | `-' | `or'
+
+<mulop> ::= `*' | `/' | `and'
+
+<constant> ::= <integer_const> | <float_const> | <char_const>
+
+\end{grammar}
+
+\section{Tokens}
+\label{sec:tokens}
+
+Os tokens foram definidos a partir das seguintes expressões regulares:
+
+\begin{grammar}
+
+<integer_const> ::= <digit>+
+
+<float_const> ::= <digit>+ `.' <digit>+
+
+<char_const> ::= `\'' <carac> `\''
+
+<literal> ::= `\"' <caractere>* `\"'
+
+<identifier> ::= <letter> (<letter> | <digit>)*
+
+<letter> ::= [A-za-z]
+
+<digit> ::= [0-9]
+
+<carac> ::= .*
+
+\end{grammar}
+
+\section{Outras características}
+\label{sec:caracteristicas}
+
+A linguagem apresenta algumas outras características, descritas a seguir:
+
+\begin{itemize}
+\item Palavras-chave são reservadas
+\item Variáveis devem ser declaradas antes de seu uso
+\item Comentários se iniciam por '\%' e terminal com '\%'
+\item Valores do tipo inteiro podem ser atribuídos a variáveis do tipo float, mas o inverso não é permitido
+\item O resultado de uma divisão é sempre um float
+\item A linguagem é case-sensitive
+\end{itemize}

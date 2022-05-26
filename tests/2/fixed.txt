@@ -2,8 +2,8 @@ routine
 
 declare
 
-int a, b, c;
-float d, var;
+int a, b;
+float c, d, val;
 
 begin
 

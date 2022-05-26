@@ -1,0 +1,129 @@
+Token routine
+Token declare
+Token int
+Token id. Name: pontuacao
+Token ,
+Token id. Name: pontuacaoMaxima
+Token ,
+Token id. Name: disponibilidade
+Token ;
+Token char
+Token id. Name: pontuacaoMinima
+Token ;
+Token begin
+Token id. Name: pontuacaoMinima
+Token =
+Token const int. Value: 50
+Token ;
+Token id. Name: pontuacaoMaxima
+Token =
+Token const int. Value: 100
+Token ;
+Token write
+Token (
+Token const string. Value: "Pontuacao do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: pontuacao
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "Disponibilidade do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: disponibilidade
+Token )
+Token ;
+Token while
+Token (
+Token id. Name: pontuacao
+Token >
+Token const int. Value: 0
+Token and
+Token (
+Token id. Name: pontuacao
+Token <=
+Token id. Name: pontuacaoMaxima
+Token )
+Token )
+Token do
+Token if
+Token (
+Token (
+Token id. Name: pontuacao
+Token >
+Token id. Name: pontuacaoMinima
+Token )
+Token and
+Token (
+Token id. Name: disponibilidade
+Token =
+Token const int. Value: 1
+Token )
+Token )
+Token then
+Token write
+Token (
+Token const string. Value: "Candidato aprovado."
+Token )
+Token ;
+Token else
+Token write
+Token (
+Token const string. Value: "Candidato reprovado."
+Token )
+Token ;
+Token end
+Token write
+Token (
+Token const string. Value: "Pontuacao do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: pontuacao
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "Disponibilidade do candidato: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: disponibilidade
+Token )
+Token ;
+Token end
+Token end
+
+LexicAnalyzer: 
+SymbolTable: 
+pontuacaoMinima: Token id. Name: pontuacaoMinima
+disponibilidade: Token id. Name: disponibilidade
+and: Token and
+or: Token or
+write: Token write
+int: Token int
+while: Token while
+declare: Token declare
+read: Token read
+end: Token end
+routine: Token routine
+until: Token until
+repeat: Token repeat
+begin: Token begin
+pontuacao: Token id. Name: pontuacao
+float: Token float
+do: Token do
+char: Token char
+if: Token if
+pontuacaoMaxima: Token id. Name: pontuacaoMaxima
+then: Token then
+not: Token not
+else: Token else

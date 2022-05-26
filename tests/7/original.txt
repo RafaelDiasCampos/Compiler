@@ -1,0 +1,22 @@
+routine
+
+int qtd, currentNum
+double lastNum;
+
+begin
+
+write("Quantos numeros deseja imprimir?")
+read(qtd);
+
+write("Sequencia de Fibonacci: ");
+
+currentNum := 1;
+lastNum := 1;
+
+while (qtd > 0) do
+    qtd := qtd - 2;
+    write(lastNum);
+    wrtie(currentNum);
+    lastNum := currentNum + lastNum;
+    currentNum := lastNum + currentNum;
+    

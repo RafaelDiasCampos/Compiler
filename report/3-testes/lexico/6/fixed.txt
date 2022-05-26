@@ -1,0 +1,159 @@
+Token routine
+Token declare
+Token int
+Token id. Name: qtd
+Token ,
+Token id. Name: currentNum
+Token ,
+Token id. Name: currentDiv
+Token ,
+Token id. Name: divisorFound
+Token ;
+Token float
+Token id. Name: divResul
+Token ;
+Token begin
+Token write
+Token (
+Token const string. Value: "Quantos numeros deseja imprimir?"
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: qtd
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "Numeros primos: "
+Token )
+Token ;
+Token id. Name: currentNum
+Token :=
+Token const int. Value: 2
+Token ;
+Token while
+Token (
+Token id. Name: qtd
+Token >
+Token const int. Value: 0
+Token )
+Token do
+Token id. Name: currentNum
+Token :=
+Token id. Name: currentNum
+Token +
+Token const int. Value: 1
+Token ;
+Token id. Name: currentDiv
+Token :=
+Token const int. Value: 2
+Token ;
+Token id. Name: divisorFound
+Token :=
+Token const int. Value: 0
+Token ;
+Token repeat
+Token id. Name: divResul
+Token :=
+Token id. Name: currentNum
+Token /
+Token id. Name: currentDiv
+Token ;
+Token while
+Token (
+Token (
+Token id. Name: divResul
+Token -
+Token const float. Value: 0.000100
+Token )
+Token >
+Token const int. Value: 0
+Token )
+Token do
+Token id. Name: divResul
+Token :=
+Token id. Name: divResul
+Token -
+Token const int. Value: 1
+Token ;
+Token if
+Token (
+Token id. Name: divResul
+Token >=
+Token -
+Token const float. Value: 0.000100
+Token )
+Token then
+Token id. Name: divisorFound
+Token :=
+Token const int. Value: 1
+Token ;
+Token id. Name: currentDiv
+Token :=
+Token id. Name: currentDiv
+Token +
+Token const int. Value: 1
+Token ;
+Token until
+Token (
+Token (
+Token id. Name: currentDiv
+Token >
+Token id. Name: currentNum
+Token /
+Token const int. Value: 2
+Token )
+Token and
+Token (
+Token id. Name: divisorFound
+Token =
+Token const int. Value: 1
+Token )
+Token )
+Token if
+Token (
+Token id. Name: divisorFound
+Token =
+Token const int. Value: 0
+Token )
+Token then
+Token id. Name: qtd
+Token :=
+Token id. Name: qtd
+Token -
+Token const int. Value: 1
+Token ;
+Token write
+Token (
+Token id. Name: currentNum
+Token )
+Token ;
+Token end
+
+LexicAnalyzer: 
+SymbolTable: 
+divResul: Token id. Name: divResul
+else: Token else
+not: Token not
+then: Token then
+if: Token if
+char: Token char
+float: Token float
+currentNum: Token id. Name: currentNum
+begin: Token begin
+repeat: Token repeat
+until: Token until
+routine: Token routine
+end: Token end
+do: Token do
+read: Token read
+declare: Token declare
+divisorFound: Token id. Name: divisorFound
+int: Token int
+qtd: Token id. Name: qtd
+write: Token write
+currentDiv: Token id. Name: currentDiv
+or: Token or
+while: Token while
+and: Token and

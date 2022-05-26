@@ -2,8 +2,7 @@ routine
 
 declare
 
-int a, aux;
-float b;
+float a, b, aux;
 
 begin
 

@@ -20,14 +20,12 @@ void testLexic(std::string filename){
 
 int main(int argc, const char** argv) {
     if (argc < 2) {
-        std::cout << "Usage: " << argv[0] << " <filename>" << std::endl;
+        std::cout << "Usage: " << argv[0] << " file" << std::endl;
         return 1;
     }
 
     try {
         std::string filename = std::string(argv[1]);
-
-        std::cout << "Starting LexicAnalyzer with file " << filename << std::endl;
         testLexic(filename);
     }
     catch (std::exception& e) {

@@ -1,0 +1,92 @@
+Token routine
+Token declare
+Token int
+Token id. Name: a
+Token ,
+Token id. Name: b
+Token ;
+Token int
+Token id. Name: resul
+Token ;
+Token float
+Token id. Name: a
+Token ,
+Token id. Name: x
+Token ;
+Token begin
+Token id. Name: a
+Token :=
+Token const int. Value: 12
+Token id. Name: a
+Token ;
+Token id. Name: x
+Token :=
+Token const int. Value: 12
+Token ;
+Token read
+Token (
+Token id. Name: a
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: b
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: c
+Token )
+Token id. Name: result
+Token :=
+Token (
+Token id. Name: a
+Token *
+Token id. Name: b
+Token +
+Token const int. Value: 1
+Token )
+Token /
+Token (
+Token id. Name: c
+Token +
+Token const int. Value: 2
+Token )
+Token ;
+Token write
+Token const string. Value: "Resultado: "
+Token ;
+Token write
+Token (
+Token id. Name: result
+Token )
+Token ;
+Token end
+
+LexicAnalyzer: 
+SymbolTable: 
+else: Token else
+not: Token not
+then: Token then
+if: Token if
+char: Token char
+float: Token float
+c: Token id. Name: c
+begin: Token begin
+repeat: Token repeat
+until: Token until
+routine: Token routine
+declare: Token declare
+int: Token int
+write: Token write
+or: Token or
+a: Token id. Name: a
+while: Token while
+and: Token and
+do: Token do
+read: Token read
+b: Token id. Name: b
+result: Token id. Name: result
+end: Token end
+resul: Token id. Name: resul
+x: Token id. Name: x

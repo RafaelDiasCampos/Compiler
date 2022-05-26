@@ -1,0 +1,101 @@
+Token routine
+Token declare
+Token int
+Token id. Name: pontuacao
+Token ,
+Token id. Name: pontuacaoMaxina
+Token ,
+Token id. Name: disponibilidade
+Token ;
+Token char
+Token id. Name: pontuacaoMinima
+Token ;
+Token begin
+Token id. Name: pontuacaoMinima
+Token =
+Token const int. Value: 50
+Token ;
+Token id. Name: pontuacaoMaxima
+Token =
+Token const int. Value: 100
+Token ;
+Token write
+Token (
+Token const string. Value: "Pontuacao do candidato: );
+read(pontuacao);
+write("
+Token id. Name: Disponibilidade
+Token do
+Token id. Name: candidato
+Invalid token at position (14, 37)
+Token const string. Value: ");
+read(disponibilidade);
+
+%
+Processamento
+%
+
+while (pontuacao>0 and (pontuacao<=pontuacaoMaxima) do
+    if ((pontuação > pontuacaoMinima) and (disponibilidade=1)) then
+        write("
+Token id. Name: Candidato
+Token id. Name: aprovado
+Invalid token at position (23, 35)
+Token const string. Value: ")
+    else
+        write("
+Token id. Name: Candidato
+Token id. Name: reprovado
+Invalid token at position (25, 36)
+Token const string. Value: ")
+    end
+    write("
+Token id. Name: Pontuacao
+Token do
+Token id. Name: candidato
+Invalid token at position (27, 35)
+Token const string. Value: ");
+    read(pontuacao);
+    write("
+Token id. Name: Disponibilidade
+Token do
+Token id. Name: candidato
+Invalid token at position (29, 41)
+Token const string. Value: ");
+    read(disponibilidade);
+end;
+
+end"
+
+LexicAnalyzer: 
+SymbolTable: 
+reprovado: Token id. Name: reprovado
+Disponibilidade: Token id. Name: Disponibilidade
+aprovado: Token id. Name: aprovado
+pontuacaoMaxima: Token id. Name: pontuacaoMaxima
+else: Token else
+not: Token not
+then: Token then
+if: Token if
+candidato: Token id. Name: candidato
+char: Token char
+float: Token float
+pontuacao: Token id. Name: pontuacao
+begin: Token begin
+repeat: Token repeat
+until: Token until
+Pontuacao: Token id. Name: Pontuacao
+routine: Token routine
+end: Token end
+pontuacaoMaxina: Token id. Name: pontuacaoMaxina
+do: Token do
+read: Token read
+declare: Token declare
+int: Token int
+Candidato: Token id. Name: Candidato
+write: Token write
+or: Token or
+while: Token while
+and: Token and
+disponibilidade: Token id. Name: disponibilidade
+pontuacaoMinima: Token id. Name: pontuacaoMinima

@@ -15,5 +15,5 @@ class TokenId : public Token {
 };
 
 inline const std::string TokenId::to_string() const {
-    return Token::to_string() + ". Value: " + id;
+    return Token::to_string() + ". Name: " + id;
 }

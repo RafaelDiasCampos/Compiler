@@ -1,0 +1,130 @@
+Token declare
+Token id. Name: integer
+Token id. Name: a
+Token ,
+Token id. Name: b
+Token ,
+Token id. Name: c
+Token ,
+Token id. Name: maior
+Token ;
+Token char
+Token id. Name: outro
+Token ;
+Token begin
+Token repeat
+Token write
+Token (
+Token const string. Value: "A: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: a
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "B: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: b
+Token )
+Token ;
+Token write
+Token (
+Token const string. Value: "C: "
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: c
+Token )
+Token ;
+Token if
+Token (
+Token (
+Token id. Name: a
+Token >
+Token id. Name: b
+Token )
+Token and
+Token (
+Token id. Name: a
+Token >
+Token id. Name: c
+Token )
+Token )
+Token end
+Token id. Name: maior
+Token :=
+Token id. Name: a
+Token else
+Token if
+Token (
+Token id. Name: b
+Token >
+Token id. Name: c
+Token )
+Token then
+Token id. Name: maior
+Token :=
+Token id. Name: b
+Token ;
+Token else
+Token id. Name: maior
+Token :=
+Token id. Name: c
+Token end
+Token end
+Token write
+Token (
+Token const string. Value: "Maior valor:"
+Token const string. Value: ");
+    write (maior);
+    write ("
+Token id. Name: Outro
+Invalid token at position (26, 19)
+Token (
+Token id. Name: S
+Token /
+Token id. Name: N
+Token )
+Token const string. Value: ");
+    read(outro);
+until (outro = 'N' || outro = 'n)
+
+end"
+
+LexicAnalyzer: 
+SymbolTable: 
+N: Token id. Name: N
+Outro: Token id. Name: Outro
+outro: Token id. Name: outro
+else: Token else
+then: Token then
+if: Token if
+maior: Token id. Name: maior
+char: Token char
+S: Token id. Name: S
+not: Token not
+integer: Token id. Name: integer
+float: Token float
+repeat: Token repeat
+until: Token until
+routine: Token routine
+end: Token end
+declare: Token declare
+int: Token int
+write: Token write
+or: Token or
+a: Token id. Name: a
+while: Token while
+and: Token and
+do: Token do
+read: Token read
+b: Token id. Name: b
+begin: Token begin
+c: Token id. Name: c

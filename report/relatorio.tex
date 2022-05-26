@@ -1,0 +1,77 @@
+\documentclass[12pt,openright,oneside,a4paper,brazil]{abntex2}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{float}
+\usepackage{amsfonts,amsthm, amssymb, amsmath}
+\usepackage{cancel}
+\usepackage{verbatim}
+\usepackage{multirow,multicol, array}
+\usepackage{indentfirst}
+\usepackage{subcaption}
+\usepackage{xcolor, colortbl}
+\usepackage{pdflscape}
+\usepackage{lipsum}
+\usepackage{syntax}
+\usepackage{listings}
+% \usepackage[brazilian,hyperpageref]{backref}
+\usepackage[alf, abnt-emphasize=bf, bibjustif, recuo=0cm, abnt-etal-cite=2, abnt-etal-list=0]{abntex2cite}
+
+\definecolor{blue}{RGB}{41,5,195}
+
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={Valdex Santos},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{relatório}, 
+		colorlinks=true,
+    	linkcolor=black,
+    	citecolor=black,
+    	filecolor=magenta,
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+
+\titulo{COMPILADORES - TRABALHO FINAL}
+\autor{	RAFAEL DIAS CAMPOS }
+\local{Belo Horizonte-MG}
+\data{2022}
+\tipotrabalho{Relatório técnico sobre compiladores}
+\preambulo{Relatório do compilador implementado no trabalho final da disciplina de Compiladores, ministrada pela professora Kecia Marques no primeiro semestre do ano letivo de 2022. }
+
+\begin{document}
+\frenchspacing 
+
+\imprimircapa
+\imprimirfolhaderosto*
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+\input{1-textos/0-resumo.tex}
+
+\textual
+
+\input{1-textos/1-introducao}
+\input{1-textos/2-utilizacao.tex}
+\input{1-textos/3-descricao}
+\input{1-textos/4-testes}
+\input{1-textos/5-lexico}
+\input{1-textos/6-sintatico.tex}
+\input{1-textos/7-semantico}
+\input{1-textos/8-gerador-codigo}
+\input{1-textos/9-conclusao}
+
+\end{document}

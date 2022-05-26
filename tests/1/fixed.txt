@@ -15,6 +15,6 @@ read (b);
 read (c);
 result := (a*b + 1) / (c+2);
 write ("Resultado: ");
-write (result);
+write (resul);
 
 end

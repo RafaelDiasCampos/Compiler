@@ -1,0 +1,93 @@
+Token routine
+Token declare
+Token float
+Token id. Name: a
+Token ,
+Token id. Name: b
+Token ,
+Token id. Name: aux
+Token ;
+Token begin
+Token id. Name: b
+Token :=
+Token const int. Value: 0
+Token ;
+Token read
+Token (
+Token id. Name: a
+Token )
+Token ;
+Token read
+Token (
+Token id. Name: b
+Token )
+Token ;
+Token if
+Token (
+Token id. Name: a
+Token <>
+Token id. Name: b
+Token )
+Token then
+Token if
+Token (
+Token id. Name: a
+Token >
+Token id. Name: b
+Token )
+Token then
+Token id. Name: aux
+Token :=
+Token id. Name: b
+Token ;
+Token id. Name: b
+Token :=
+Token id. Name: a
+Token ;
+Token id. Name: a
+Token :=
+Token id. Name: aux
+Token ;
+Token end
+Token write
+Token (
+Token id. Name: a
+Token )
+Token ;
+Token write
+Token (
+Token id. Name: b
+Token )
+Token ;
+Token else
+Token write
+Token (
+Token const string. Value: "Numeros iguais."
+Token )
+Token ;
+Token end
+
+LexicAnalyzer: 
+SymbolTable: 
+b: Token id. Name: b
+and: Token and
+a: Token id. Name: a
+or: Token or
+aux: Token id. Name: aux
+write: Token write
+int: Token int
+while: Token while
+declare: Token declare
+read: Token read
+end: Token end
+routine: Token routine
+until: Token until
+repeat: Token repeat
+begin: Token begin
+float: Token float
+do: Token do
+char: Token char
+if: Token if
+then: Token then
+not: Token not
+else: Token else
