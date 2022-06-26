@@ -3,11 +3,11 @@ routine
 declare
 
 int qtd, currentNum, currentDiv, divisorFound;
-float divResul;
+double divResul;
 
 begin
 
-write("Quantos numeros deseja imprimir?");
+write("Quantos numeros deseja imprimir?")
 read(qtd);
 
 write("Numeros primos: ");
@@ -24,14 +24,12 @@ while (qtd > 0) do
         while ((divResul - 0.0001) > 0) do
             divResul := divResul - 1;
         if (divResul >= -0.0001) then
-            divisorFound :=  1;
+            divisorFound =  1
 
         currentDiv := currentDiv + 1;
 
     until ( (currentDiv > currentNum / 2) and (divisorFound = 1))
 
-    if (divisorFound = 0) then
+    if (divisorFound == 0) then
         qtd := qtd - 1;
         write(currentNum);
-        
-end

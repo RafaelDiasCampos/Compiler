@@ -8,15 +8,13 @@ A linguagem foi definida pela seguinte Gramática Livre de Contexto (em notaçã
 
 \begin{grammar}
 
-<statement> ::= <ident> `=' <expr>
-
-<program> ::= <a> `=' `routine' body
+<program> ::= `routine' body
 
 <body> ::= [<decl-list>] `begin' <stmt-list> `end'
 
 <decl-list> ::= `declare' <decl> `;' {<decl> `;'}
 
-<decl> ::= `declare' <decl> `;' {<decl> `;'}
+<decl> ::= <type> <ident-list>
 
 <ident-list> ::= <identifier> {`;' <identifier>}
 
@@ -43,7 +41,7 @@ A linguagem foi definida pela seguinte Gramática Livre de Contexto (em notaçã
 
 <read-stmt> ::= `read' `(' <identifier> `)'
 
-<write-stmt> ::= `write` `(` <writable> `)'
+<write-stmt> ::= `write' `(` <writable> `)'
 
 <writable> ::= <simple-expr> | <literal>
 
@@ -53,7 +51,7 @@ A linguagem foi definida pela seguinte Gramática Livre de Contexto (em notaçã
 
 <term> ::= <factor-a> | <term> <mulop> <factor-a>
 
-<fator-a> ::= <factor> | `not' <factor> | `-' <factor>
+<factor-a> ::= <factor> | `not' <factor> | `-' <factor>
 
 <factor> ::= <identifier> | <constant> | `(' <expression> `)'
 

@@ -1,8 +1,6 @@
-routine
-
 declare
 
-int a, b, c, maior;
+integer a, b, c, maior;
 char outro;
 
 begin
@@ -14,13 +12,13 @@ repeat
     read(b);
     write("C: ");
     read(c);
-    if ( (a>b) and (a>c) ) then
-        maior := a;
+    if ( (a>b) and (a>c) ) end
+        maior := a
     else
         if (b>c) then
             maior := b;
         else
-            maior := c;
+            maior := c
         end
     end
     write("Maior valor:");

@@ -42,26 +42,26 @@ Invalid token at position (16, 4)
 LexicAnalyzer: 
 SymbolTable: 
 var: Token id. Name: var
-else: Token else
+d: Token id. Name: d
+and: Token and
+c: Token id. Name: c
 not: Token not
-then: Token then
-if: Token if
-char: Token char
+int: Token int
+read: Token read
 float: Token float
-repeat: Token repeat
 until: Token until
 routine: Token routine
-end: Token end
 declare: Token declare
-d: Token id. Name: d
-int: Token int
-write: Token write
-or: Token or
-a: Token id. Name: a
-while: Token while
-and: Token and
-do: Token do
-read: Token read
+then: Token then
 b: Token id. Name: b
+a: Token id. Name: a
+char: Token char
+if: Token if
+or: Token or
+end: Token end
+else: Token else
 begin: Token begin
-c: Token id. Name: c
+repeat: Token repeat
+while: Token while
+do: Token do
+write: Token write

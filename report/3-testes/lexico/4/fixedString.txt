@@ -107,29 +107,29 @@ Token end
 
 LexicAnalyzer: 
 SymbolTable: 
-pontua: Token id. Name: pontua
-pontuacaoMaxima: Token id. Name: pontuacaoMaxima
-else: Token else
-not: Token not
-then: Token then
-if: Token if
-char: Token char
-float: Token float
-pontuacao: Token id. Name: pontuacao
-begin: Token begin
 o: Token id. Name: o
-repeat: Token repeat
+pontua: Token id. Name: pontua
+pontuacaoMinima: Token id. Name: pontuacaoMinima
+disponibilidade: Token id. Name: disponibilidade
+pontuacaoMaxina: Token id. Name: pontuacaoMaxina
+and: Token and
+not: Token not
+int: Token int
+read: Token read
+float: Token float
 until: Token until
 routine: Token routine
-end: Token end
-pontuacaoMaxina: Token id. Name: pontuacaoMaxina
-do: Token do
-read: Token read
 declare: Token declare
-int: Token int
-write: Token write
+then: Token then
+char: Token char
+if: Token if
 or: Token or
+end: Token end
+else: Token else
+pontuacaoMaxima: Token id. Name: pontuacaoMaxima
+begin: Token begin
+repeat: Token repeat
+pontuacao: Token id. Name: pontuacao
 while: Token while
-and: Token and
-disponibilidade: Token id. Name: disponibilidade
-pontuacaoMinima: Token id. Name: pontuacaoMinima
+do: Token do
+write: Token write

@@ -65,28 +65,28 @@ Token end
 
 LexicAnalyzer: 
 SymbolTable: 
-else: Token else
-not: Token not
-then: Token then
-if: Token if
-char: Token char
-float: Token float
+result: Token id. Name: result
+x: Token id. Name: x
+and: Token and
 c: Token id. Name: c
-begin: Token begin
-repeat: Token repeat
+not: Token not
+resul: Token id. Name: resul
+int: Token int
+read: Token read
+float: Token float
 until: Token until
 routine: Token routine
 declare: Token declare
-int: Token int
-write: Token write
-or: Token or
-a: Token id. Name: a
-while: Token while
-and: Token and
-do: Token do
-read: Token read
+then: Token then
 b: Token id. Name: b
-result: Token id. Name: result
+a: Token id. Name: a
+char: Token char
+if: Token if
+or: Token or
 end: Token end
-resul: Token id. Name: resul
-x: Token id. Name: x
+else: Token else
+begin: Token begin
+repeat: Token repeat
+while: Token while
+do: Token do
+write: Token write

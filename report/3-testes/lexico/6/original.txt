@@ -137,26 +137,26 @@ LexicAnalyzer:
 SymbolTable: 
 divResul: Token id. Name: divResul
 double: Token id. Name: double
-else: Token else
-not: Token not
-then: Token then
-if: Token if
-char: Token char
-float: Token float
+currentDiv: Token id. Name: currentDiv
 currentNum: Token id. Name: currentNum
-begin: Token begin
-repeat: Token repeat
+qtd: Token id. Name: qtd
+and: Token and
+not: Token not
+int: Token int
+read: Token read
+float: Token float
 until: Token until
 routine: Token routine
-end: Token end
-do: Token do
-read: Token read
 declare: Token declare
+then: Token then
+char: Token char
+if: Token if
 divisorFound: Token id. Name: divisorFound
-int: Token int
-qtd: Token id. Name: qtd
-write: Token write
-currentDiv: Token id. Name: currentDiv
 or: Token or
+end: Token end
+else: Token else
+begin: Token begin
+repeat: Token repeat
 while: Token while
-and: Token and
+do: Token do
+write: Token write

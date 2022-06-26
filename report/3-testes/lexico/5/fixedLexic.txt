@@ -1,6 +1,5 @@
-Token routine
 Token declare
-Token int
+Token id. Name: integer
 Token id. Name: a
 Token ,
 Token id. Name: b
@@ -58,11 +57,10 @@ Token >
 Token id. Name: c
 Token )
 Token )
-Token then
+Token end
 Token id. Name: maior
 Token :=
 Token id. Name: a
-Token ;
 Token else
 Token if
 Token (
@@ -79,7 +77,6 @@ Token else
 Token id. Name: maior
 Token :=
 Token id. Name: c
-Token ;
 Token end
 Token end
 Token write
@@ -116,27 +113,28 @@ Token end
 
 LexicAnalyzer: 
 SymbolTable: 
-outro: Token id. Name: outro
-else: Token else
+and: Token and
+c: Token id. Name: c
 not: Token not
-then: Token then
-if: Token if
+int: Token int
+read: Token read
 float: Token float
-repeat: Token repeat
 until: Token until
 routine: Token routine
-end: Token end
 declare: Token declare
-int: Token int
-char: Token char
-maior: Token id. Name: maior
-write: Token write
-or: Token or
-a: Token id. Name: a
-while: Token while
-and: Token and
-do: Token do
-read: Token read
+then: Token then
 b: Token id. Name: b
+a: Token id. Name: a
+char: Token char
+outro: Token id. Name: outro
+if: Token if
+maior: Token id. Name: maior
+or: Token or
+end: Token end
+else: Token else
 begin: Token begin
-c: Token id. Name: c
+repeat: Token repeat
+while: Token while
+integer: Token id. Name: integer
+do: Token do
+write: Token write

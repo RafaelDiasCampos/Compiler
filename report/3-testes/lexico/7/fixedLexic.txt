@@ -1,18 +1,16 @@
 Token routine
-Token declare
 Token int
 Token id. Name: qtd
 Token ,
 Token id. Name: currentNum
-Token ,
+Token id. Name: double
 Token id. Name: lastNum
 Token ;
-Token begin
+Token id. Name: bein
 Token write
 Token (
 Token const string. Value: "Quantos numeros deseja imprimir?"
 Token )
-Token ;
 Token read
 Token (
 Token id. Name: qtd
@@ -37,7 +35,7 @@ Token id. Name: qtd
 Token >
 Token const int. Value: 0
 Token )
-Token do
+Token id. Name: d
 Token id. Name: qtd
 Token :=
 Token id. Name: qtd
@@ -66,30 +64,32 @@ Token id. Name: lastNum
 Token +
 Token id. Name: currentNum
 Token ;
-Token end
 
 LexicAnalyzer: 
 SymbolTable: 
-and: Token and
-or: Token or
-write: Token write
-wrtie: Token id. Name: wrtie
-qtd: Token id. Name: qtd
-int: Token int
-while: Token while
-declare: Token declare
-read: Token read
-end: Token end
-routine: Token routine
-until: Token until
-repeat: Token repeat
-begin: Token begin
+d: Token id. Name: d
+lastNum: Token id. Name: lastNum
+double: Token id. Name: double
 currentNum: Token id. Name: currentNum
+qtd: Token id. Name: qtd
+and: Token and
+not: Token not
+int: Token int
+read: Token read
+bein: Token id. Name: bein
 float: Token float
-do: Token do
+wrtie: Token id. Name: wrtie
+until: Token until
+routine: Token routine
+declare: Token declare
+then: Token then
 char: Token char
 if: Token if
-lastNum: Token id. Name: lastNum
-then: Token then
-not: Token not
+or: Token or
+end: Token end
 else: Token else
+begin: Token begin
+repeat: Token repeat
+while: Token while
+do: Token do
+write: Token write

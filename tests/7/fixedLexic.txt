@@ -1,12 +1,11 @@
 routine
 
-declare
+int qtd, currentNum
+double lastNum;
 
-int qtd, currentNum, lastNum;
+bein
 
-begin
-
-write("Quantos numeros deseja imprimir?");
+write("Quantos numeros deseja imprimir?")
 read(qtd);
 
 write("Sequencia de Fibonacci: ");
@@ -14,11 +13,10 @@ write("Sequencia de Fibonacci: ");
 currentNum := 1;
 lastNum := 1;
 
-while (qtd > 0) do
+while (qtd > 0) d
     qtd := qtd - 2;
     write(lastNum);
     wrtie(currentNum);
     lastNum := currentNum + lastNum;
     currentNum := lastNum + currentNum;
     
-end

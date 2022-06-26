@@ -161,7 +161,7 @@ Token* LexicAnalyzer::parseNumericConst() {
 
     if (c == '.') {
         handler.getNextChar(c); // Flushes the '.' read
-        uint32_t float_part = 0.0f;
+        uint32_t float_part = 0;
         uint32_t power = 1;
 
         while (handler.getNextChar(c)) {

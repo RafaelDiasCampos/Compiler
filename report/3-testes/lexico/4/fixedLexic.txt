@@ -3,7 +3,7 @@ Token declare
 Token int
 Token id. Name: pontuacao
 Token ,
-Token id. Name: pontuacaoMaxima
+Token id. Name: pontuacaoMaxina
 Token ,
 Token id. Name: disponibilidade
 Token ;
@@ -50,7 +50,6 @@ Token id. Name: pontuacao
 Token <=
 Token id. Name: pontuacaoMaxima
 Token )
-Token )
 Token do
 Token if
 Token (
@@ -71,13 +70,11 @@ Token write
 Token (
 Token const string. Value: "Candidato aprovado."
 Token )
-Token ;
 Token else
 Token write
 Token (
 Token const string. Value: "Candidato reprovado."
 Token )
-Token ;
 Token end
 Token write
 Token (
@@ -100,30 +97,32 @@ Token id. Name: disponibilidade
 Token )
 Token ;
 Token end
+Token ;
 Token end
 
 LexicAnalyzer: 
 SymbolTable: 
 pontuacaoMinima: Token id. Name: pontuacaoMinima
 disponibilidade: Token id. Name: disponibilidade
+pontuacaoMaxina: Token id. Name: pontuacaoMaxina
 and: Token and
-or: Token or
-write: Token write
+not: Token not
 int: Token int
-while: Token while
-declare: Token declare
 read: Token read
-end: Token end
-routine: Token routine
-until: Token until
-repeat: Token repeat
-begin: Token begin
-pontuacao: Token id. Name: pontuacao
 float: Token float
-do: Token do
+until: Token until
+routine: Token routine
+declare: Token declare
+then: Token then
 char: Token char
 if: Token if
-pontuacaoMaxima: Token id. Name: pontuacaoMaxima
-then: Token then
-not: Token not
+or: Token or
+end: Token end
 else: Token else
+pontuacaoMaxima: Token id. Name: pontuacaoMaxima
+begin: Token begin
+repeat: Token repeat
+pontuacao: Token id. Name: pontuacao
+while: Token while
+do: Token do
+write: Token write

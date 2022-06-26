@@ -1,0 +1,69 @@
+\chapter{Analisador Sintático}
+\label{cap:sintatico}
+
+\section{Alteração na Gramática}
+A gramática original apresenta recursão a esquerda, o que impossibilita a construção de um parser recursivo descendente que a reconheça.
+Por isso, foi feita a seguinte modificação na gramática para eliminar essa recursão:
+
+\begin{grammar}
+    
+    <program> ::= `routine' body
+    
+    <body> ::= [<decl-list>] `begin' <stmt-list> `end'
+    
+    <decl-list> ::= `declare' <decl> `;' {<decl> `;'}
+    
+    <decl> ::= <type> <ident-list>
+    
+    <ident-list> ::= <identifier> {`;' <identifier>}
+    
+    <type> ::= `int` | `float' | `char'
+    
+    <stmt-list> ::= <stmt> {`;' <stmt>}
+    
+    <stmt> ::= <assign-stmt> | <if-stmt> | <while-stmt> | <repeat-stmt> | <read-stmt> | <write-stmt>
+    
+    <assign-stmt> ::= <identifier> `:=' <simple-expr-a>
+    
+    <if-stmt> ::= `if' <condition> `then' <stmt-list> `end'
+                  \alt `if' <condition> `then' <stmt-list> `else' <stmt-list> `end'
+                  
+    <condition> : <expression>
+    
+    <repeat-stmt> ::= `repeat' <stmt-list> <stmt-suffix>
+    
+    <stmt-suffix> ::= `until' <condition>
+    
+    <while-stmt> ::= <stmt-prefix> <stmt-list> `end'
+    
+    <stmt-prefix> ::= `while' <condition> `do'
+    
+    <read-stmt> ::= `read' `(' <identifier> `)'
+    
+    <write-stmt> ::= `write` `(` <writable> `)'
+    
+    <writable> ::= <simple-expr-a> | <literal>
+    
+    <expression> ::= <simple-expr-a> | <simple-expr-a> <relop> <simple-expr-a>
+    
+    <simple-expr-a> ::= <term-a> <simple-expr>
+
+    <simple-expr> ::= <addop> <term-a> <simple-expr> | lambda
+    
+    <term-a> ::= <factor-a> <term>
+
+    <term> ::= <mulop> <factor-a> <term> | lambda
+    
+    <factor-a> ::= <factor> | `not' <factor> | `-' <factor>
+    
+    <factor> ::= <identifier> | <constant> | `(' <expression> `)'
+    
+    <relop> ::= `=' | `>' | `>=' | `<' | `<=' | `<>'
+    
+    <addop> ::= `+' | `-' | `or'
+    
+    <mulop> ::= `*' | `/' | `and'
+    
+    <constant> ::= <integer_const> | <float_const> | <char_const>
+    
+    \end{grammar}

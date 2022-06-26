@@ -2,7 +2,7 @@ routine
 
 declare
 
-int pontuacao, pontuacaoMaxima, disponibilidade;
+int pontuacao, pontuacaoMaxina, disponibilidade;
 char pontuacaoMinima;
 
 begin
@@ -18,16 +18,16 @@ read(disponibilidade);
 Processamento
 %
 
-while (pontuacao>0 and (pontuacao<=pontuacaoMaxima)) do
+while (pontuacao>0 and (pontuacao<=pontuacaoMaxima) do
     if ((pontuacao > pontuacaoMinima) and (disponibilidade=1)) then
-        write("Candidato aprovado.");
+        write("Candidato aprovado.")
     else
-        write("Candidato reprovado.");
+        write("Candidato reprovado.")
     end
     write("Pontuacao do candidato: ");
     read(pontuacao);
     write("Disponibilidade do candidato: ");
     read(disponibilidade);
-end
+end;
 
 end
