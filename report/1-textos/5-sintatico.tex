@@ -67,3 +67,85 @@ Por isso, foi feita a seguinte modificação na gramática para eliminar essa re
     <constant> ::= <integer_const> | <float_const> | <char_const>
     
     \end{grammar}
+
+\section{Calculo de First e Follow}
+
+Para ajudar na implementação do compilador, foi realizad o cálculo do First e Follow para cada não-terminal da gramática:
+
+    \begin{itemize}
+        \item \textbf{First}:
+        \begin{itemize}
+            \item \textit{<program>}: `routine'
+            \item \textit{<body>}: `begin' | `declare'
+            \item \textit{<decl-list>}: `declare'
+            \item \textit{<decl>}: `int' | `float' | `char'
+            \item \textit{<ident-list>}: <identifier>
+            \item \textit{<type>}: `int' | `float' | `char'
+            \item \textit{<stmt-list>}: <identifier> | `if' | `while' | `repeat' | `read' | `write'
+            \item \textit{<stmt>}: <identifier> | `if' | `while' | `repeat' | `read' | `write'
+            \item \textit{<assign-stmt>}: <identifier>
+            \item \textit{<if-stmt>}: `if'
+            \item \textit{<condition>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<repeat-stmt>}: `repeat'
+            \item \textit{<stmt-suffix>}: `until'
+            \item \textit{<while-stmt>}: `while'
+            \item \textit{<stmt-prefix>}: `while'
+            \item \textit{<read-stmt>}: `read'
+            \item \textit{<write-stmt>}: `write'
+            \item \textit{<writable>}: <identifier> | `(' | `not' | `-' | <literal> | <integer_const> | <float_const> | <char_const>
+            \item \textit{<expression>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<simple-expr-a>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<simple-expr>}: `-' | `+' | `or' | lambda
+            \item \textit{<term-a>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<term>}: `*' | `/' | `and' | lambda
+            \item \textit{<factor-a>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<factor>}: <identifier> | `(' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<relop>}: `=' | `>' | `>=' | `<' | `<=' | `<>'
+            \item \textit{<addop>}: `+' | `-' | `or'
+            \item \textit{<mulop>}: `*' | `/' | `and'
+            \item \textit{<constant>}: <integer_const> | <float_const> | <char_const>
+        \end{itemize}
+        \item \textbf{Follow}:
+        \begin{itemize}
+            \item \textit{<program>}: \$
+            \item \textit{<body>}: \$
+            \item \textit{<decl-list>}: `begin'
+            \item \textit{<decl>}: `;'
+            \item \textit{<ident-list>}: `;'
+            \item \textit{<type>}: <identifier> 
+            \item \textit{<stmt-list>}: `end' | `else' | `until'
+            \item \textit{<stmt>}: `end' | `else' | `until'
+            \item \textit{<assign-stmt>}: `end' | `else' | `until'
+            \item \textit{<if-stmt>}: `end' | `else' | `until'
+            \item \textit{<condition>}: `end' | `else' | `until' | `then' | `do'
+            \item \textit{<repeat-stmt>}: `end' | `else' | `until'
+            \item \textit{<stmt-suffix>}: `end' | `else' | `until'
+            \item \textit{<while-stmt>}: `end' | `else' | `until'
+            \item \textit{<stmt-prefix>}: <identifier> | `if' | `repeat' | `while' | `read' | `write'
+            \item \textit{<read-stmt>}: `end' | `else' | `until' 
+            \item \textit{<write-stmt>}: `end' | `else' | `until' 
+            \item \textit{<writable>}: `)'
+            \item \textit{<expression>}: `end' | `then' | `else' | `until' | `do' | `)'
+            \item \textit{<simple-expr-a>}: `end' | `then' | `else' | `until' | `do' | `)' | `=' | `>' | `>=' | `<' | `<=' | `<>'
+            \item \textit{<simple-expr>}: `end' | `then' | `else' | `until' | `do' | `)' | `=' | `>' | `>=' | `<' | `<=' | `<>'
+            \item \textit{<term-a>}: `end' | `then' | `else' | `until' | `do' | `)' | `-' | `+' | `or' | `=' | `>' | `>=' | `<' | `<=' | `<>'
+            \item \textit{<term>}: `end' | `then' | `else' | `until' | `do' | `)' | `-' | `+' | `or' | `=' | `>' | `>=' | `<' | `<=' | `<>'
+            \item \textit{<factor-a>}: `end' | `then' | `else' | `until' | `do' | `)' | `-' | `+' | `or' | `=' | `>' | `>=' | `<' | `<=' | `<>' | `*' | `/' | `and'
+            \item \textit{<factor>}: `end' | `then' | `else' | `until' | `do' | `)' | `-' | `+' | `or' | `=' | `>' | `>=' | `<' | `<=' | `<>' | `*' | `/' | `and'
+            \item \textit{<relop>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<addop>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<mulop>}: <identifier> | `(' | `not' | `-' | <integer_const> | <float_const> | <char_const>
+            \item \textit{<constant>}: `end' | `then' | `else' | `until' | `do' | `)' | `-' | `+' | `or' | `=' | `>' | `>=' | `<' | `<=' | `<>' | `*' | `/' | `and'
+        \end{itemize}
+    \end{itemize}
+    
+\section{Estrutura do Programa}
+Foi feita implementação de um Parser Recursivo Descendente para reconhecer a gramática da linguagem tilizando o algoritmo de parsing LL(1) .
+
+Cada regra da gramática foi representada por uma classe que herda de \textbf{Construct}.
+Essas regras recebem como parâmetros objetos do tipo \textbf{Token} ou do tipo \textbf{Construct} que representam a derivação escolhida para essa regra. 
+
+\section{Recuperação de Erros}
+Para recuperar os erros de sintaxe, foi utilizado o método baseado na análise do Follow de cada regra da gramática.
+Ao encontrar um erro na construção de uma regra, o programa "come"  novos Tokens até encontrar um que pertence ao Follow da regra que estava sendo construída.
+Dessa forma, é garantido que pelo menos o início da construção da regra seguinte será possível, o que permite um reconhecimento maior de erros.

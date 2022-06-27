@@ -1,0 +1,41 @@
+routine
+
+declare
+
+int qtd, currentNum, currentDiv, divisorFound;
+float divResul;
+
+begin
+
+write("Quantos numeros deseja imprimir?");
+read(qtd);
+
+write("Numeros primos: ");
+
+currentNum := 2;
+while (qtd > 0) do   
+    currentNum := currentNum + 1;
+    currentDiv := 2;
+    divisorFound := 0;
+
+    repeat
+        divResul := currentNum / currentDiv;
+
+        while ((divResul - 0.0001) > 0) do
+            divResul := divResul - 1
+        end;
+        if (divResul >= -0.0001) then
+            divisorFound :=  1
+        end;
+
+        currentDiv := currentDiv + 1
+
+    until ( (currentDiv > currentNum / 2) and (divisorFound = 1));
+
+    if (divisorFound = 0) then
+        qtd := qtd - 1;
+        write(currentNum)
+    end
+end
+
+end

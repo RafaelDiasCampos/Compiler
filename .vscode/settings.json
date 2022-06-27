@@ -2,7 +2,7 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "cmake.debugConfig": {        
         "args": [
-            "${workspaceFolder}/tests/1/original.txt"
+            "${workspaceFolder}/tests/7/fixedSyntatic.txt"
         ]
     },
     "cmake.configureOnOpen": true,

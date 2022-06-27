@@ -9,10 +9,13 @@ class SimpleExpr;
 class SimpleExpr : public Construct {
 public:
     SimpleExpr() {}
-    SimpleExpr(std::unique_ptr<AddOp> addOp, std::unique_ptr<TermA> term) : addOp(std::move(addOp)), 
-                                                                           term(std::move(term)){}
+    SimpleExpr(std::unique_ptr<AddOp> addOp, std::unique_ptr<TermA> termA, std::unique_ptr<SimpleExpr> simpleExpr) : 
+                                                                           addOp(std::move(addOp)), 
+                                                                           termA(std::move(termA)),
+                                                                           simpleExpr(std::move(simpleExpr)){}
     ~SimpleExpr() {}
 private:
     std::unique_ptr<AddOp> addOp;
-    std::unique_ptr<TermA> term;
+    std::unique_ptr<TermA> termA;
+    std::unique_ptr<SimpleExpr> simpleExpr;
 };

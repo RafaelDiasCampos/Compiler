@@ -5,9 +5,9 @@
 
 class AssignStmt : public Construct {
 public:
-    AssignStmt(TokenId* id, std::unique_ptr<SimpleExpr> simpleExpr) : id(id), simpleExpr(std::move(simpleExpr)) {}
+    AssignStmt(TokenId* id, std::unique_ptr<SimpleExprA> simpleExprA) : id(id), simpleExprA(std::move(simpleExprA)) {}
     ~AssignStmt() {}
 private:
     TokenId* id;
-    std::unique_ptr<SimpleExpr> simpleExpr;
+    std::unique_ptr<SimpleExprA> simpleExprA;
 };

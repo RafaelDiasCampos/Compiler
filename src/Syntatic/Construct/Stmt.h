@@ -20,12 +20,12 @@ public:
         Read,
         Write
     };
-    Stmt(std::unique_ptr<AssignStmt> assignStmt) : assignStmt(std::move(assignStmt)), statementType(Assign) {}
-    Stmt(std::unique_ptr<IfStmt> ifStmt) : ifStmt(std::move(ifStmt)), statementType(If) {}
-    Stmt(std::unique_ptr<WhileStmt> whileStmt) : whileStmt(std::move(whileStmt)), statementType(While) {}
-    Stmt(std::unique_ptr<RepeatStmt> repeatStmt) : repeatStmt(std::move(repeatStmt)), statementType(Repeat) {}
-    Stmt(std::unique_ptr<ReadStmt> readStmt) : readStmt(std::move(readStmt)), statementType(Read) {}
-    Stmt(std::unique_ptr<WriteStmt> writeStmt) : writeStmt(std::move(writeStmt)), statementType(Write) {}
+    Stmt(std::unique_ptr<AssignStmt> assignStmt) : statementType(Assign), assignStmt(std::move(assignStmt)) {}
+    Stmt(std::unique_ptr<IfStmt> ifStmt) : statementType(If), ifStmt(std::move(ifStmt)) {}
+    Stmt(std::unique_ptr<WhileStmt> whileStmt) : statementType(While), whileStmt(std::move(whileStmt)) {}
+    Stmt(std::unique_ptr<RepeatStmt> repeatStmt) : statementType(Repeat), repeatStmt(std::move(repeatStmt)) {}
+    Stmt(std::unique_ptr<ReadStmt> readStmt) : statementType(Read), readStmt(std::move(readStmt)) {}
+    Stmt(std::unique_ptr<WriteStmt> writeStmt) : statementType(Write), writeStmt(std::move(writeStmt)) {}
     ~Stmt() {}
 private:
     StatementType statementType;

@@ -9,8 +9,8 @@ class SimpleExprA;
 class SimpleExprA : public Construct {
 public:
     SimpleExprA() {}
-    SimpleExprA(std::unique_ptr<TermA> term, std::unique_ptr<SimpleExpr> simpleExpr) : term(std::move(term)),
-                                                                                      simpleExpr(std::move(simpleExpr)) {}
+    SimpleExprA(std::unique_ptr<TermA> term, std::unique_ptr<SimpleExpr> simpleExpr) : simpleExpr(std::move(simpleExpr)),
+                                                                                      term(std::move(term)) {}
     ~SimpleExprA() {}
 private:
     std::unique_ptr<SimpleExpr> simpleExpr;

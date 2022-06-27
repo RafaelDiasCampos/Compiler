@@ -10,7 +10,7 @@ public:
     enum FactorAType {
         Base,
         Not,
-        Minus
+        Sub
     };
     FactorA(std::unique_ptr<Factor> factor, FactorAType type) : factor(std::move(factor)), type(type) {}
     ~FactorA() {}
