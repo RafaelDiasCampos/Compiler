@@ -12,8 +12,8 @@ class SymbolTable {
     public:
     SymbolTable();
 
-    Token* insertSymbol(std::string id, std::unique_ptr<Token> token);
-    Token* insertId(std::string id);
+    Token* insert_symbol(std::string id, std::unique_ptr<Token> token);
+    Token* insert_id(std::string id);
 
     const std::string to_string() const;
 

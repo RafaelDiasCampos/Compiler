@@ -5,6 +5,10 @@ void testSyntatic(std::string filename){
     SyntaticAnalyzer synt(filename);
 
     std::unique_ptr<Program> program = synt.parseProgram();
+
+    if (!synt.has_error) {
+        std::cout << "Compilation successful!" << std::endl;
+    }
 }
 
 int main(int argc, const char** argv) {

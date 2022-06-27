@@ -1,32 +1,45 @@
 #include "Syntatic.h"
 #include <memory>
 
-void SyntaticAnalyzer::printError() {
-    std::cout << "Error: Unexpected Construct in Line " << lexic.getFilePosition() << std::endl;
+void SyntaticAnalyzer::print_error() {
+    std::cout << "Error: Unexpected token at position " << lexic.get_file_position() << std::endl;
+    has_error = true;
 }
 
-Token* SyntaticAnalyzer::getNextToken() {
+Token* SyntaticAnalyzer::get_next_token() {
     if (returned_token) {
         returned_token = false;
         return token_read;
     }
 
-    token_read = lexic.getNextToken();
+    token_read = lexic.get_next_token();
 
     while (token_read->token_type == Token::INVALID_TOKEN) {
-        printError();
-        token_read = lexic.getNextToken();
+        std::cout << "Error: Invalid token at position " << lexic.get_file_position() << std::endl;
+        has_error = true;
+        token_read = lexic.get_next_token();
     }
 
     return token_read;
 }
 
-void SyntaticAnalyzer::returnToken() {
+void SyntaticAnalyzer::return_token() {
     returned_token = true; 
 }
 
+void SyntaticAnalyzer::eat_until(std::list<Token::TokenType> tokens) {
+    return_token(); 
+    Token* token = get_next_token();
+    while ( std::find(tokens.begin(), tokens.end(), token->token_type) == tokens.end() &&
+            token->token_type != Token::END_OF_FILE) {
+        token = get_next_token();
+    }
+
+    return_token();   
+}
+
 std::unique_ptr<Constant> SyntaticAnalyzer::parseConstant() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type == Token::CONST_INT ||
         token->token_type == Token::CONST_FLOAT ||
@@ -34,13 +47,14 @@ std::unique_ptr<Constant> SyntaticAnalyzer::parseConstant() {
             return std::make_unique<Constant>((ValueType*) token);
         }
 
-    printError();
+    print_error();
+    eat_until(Constant::follow);
 
     return nullptr;
 }
 
 std::unique_ptr<MulOp> SyntaticAnalyzer::parseMulOp() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     switch (token->token_type) {
         case Token::MUL:
@@ -50,13 +64,14 @@ std::unique_ptr<MulOp> SyntaticAnalyzer::parseMulOp() {
         case Token::AND:
             return std::make_unique<MulOp>(MulOp::AND);
         default:
-            printError();
+            print_error();
+            eat_until(MulOp::follow);
             return nullptr;
     }
 }
 
 std::unique_ptr<AddOp> SyntaticAnalyzer::parseAddOp() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     switch (token->token_type) {
         case Token::ADD:
@@ -66,13 +81,14 @@ std::unique_ptr<AddOp> SyntaticAnalyzer::parseAddOp() {
         case Token::OR:
             return std::make_unique<AddOp>(AddOp::OR);
         default:
-            printError();
+            print_error();
+            eat_until(AddOp::follow);
             return nullptr;
     }
 }
 
 std::unique_ptr<RelOp> SyntaticAnalyzer::parseRelOp() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     switch (token->token_type) {
         case Token::COMP_EQ:
@@ -88,13 +104,14 @@ std::unique_ptr<RelOp> SyntaticAnalyzer::parseRelOp() {
         case Token::COMP_LE:
             return std::make_unique<RelOp>(RelOp::LESS_THAN_OR_EQUAL);
         default:
-            printError();
+            print_error();
+            eat_until(RelOp::follow);
             return nullptr;
     }
 }
 
 std::unique_ptr<Factor> SyntaticAnalyzer::parseFactor() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     std::unique_ptr<Expression> expr;
 
@@ -104,25 +121,27 @@ std::unique_ptr<Factor> SyntaticAnalyzer::parseFactor() {
         case Token::CONST_INT:
         case Token::CONST_FLOAT:
         case Token::CONST_CHAR:
-            returnToken();
+            return_token();
             return std::make_unique<Factor>(parseConstant());
         case Token::OPEN_BRACES:
             expr = parseExpression();
 
-            token = getNextToken();
+            token = get_next_token();
             if (token->token_type != Token::CLOSE_BRACES) {
-                printError();
+                print_error();
+                eat_until(Factor::follow);
             }
 
             return std::make_unique<Factor>(std::move(expr));
         default:
-            printError();
+            print_error();
+            eat_until(Factor::follow);
             return nullptr;
     }
 }
 
 std::unique_ptr<FactorA> SyntaticAnalyzer::parseFactorA() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     switch (token->token_type) {
         case Token::NOT:
@@ -130,13 +149,13 @@ std::unique_ptr<FactorA> SyntaticAnalyzer::parseFactorA() {
         case Token::SUB:
             return std::make_unique<FactorA>(parseFactor(), FactorA::Sub);
         default:
-            returnToken();
+            return_token();
             return std::make_unique<FactorA>(parseFactor(), FactorA::Base);
     }
 }
 
 std::unique_ptr<Term> SyntaticAnalyzer::parseTerm() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     std::unique_ptr<MulOp> mulOp;
     std::unique_ptr<FactorA> factorA;
@@ -146,13 +165,13 @@ std::unique_ptr<Term> SyntaticAnalyzer::parseTerm() {
         case Token::MUL:
         case Token::DIV:
         case Token::AND:
-            returnToken();
+            return_token();
             mulOp = parseMulOp();
             factorA = parseFactorA();
             term = parseTerm();
             return std::make_unique<Term>(std::move(mulOp), std::move(factorA), std::move(term));
         default:
-            returnToken();
+            return_token();
             return std::make_unique<Term>();
     }
 }
@@ -164,7 +183,7 @@ std::unique_ptr<TermA> SyntaticAnalyzer::parseTermA() {
 }
 
 std::unique_ptr<SimpleExpr> SyntaticAnalyzer::parseSimpleExpr() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     std::unique_ptr<AddOp> addOp;
     std::unique_ptr<TermA> termA;
@@ -174,13 +193,13 @@ std::unique_ptr<SimpleExpr> SyntaticAnalyzer::parseSimpleExpr() {
         case Token::ADD:
         case Token::SUB:
         case Token::OR:
-            returnToken();
+            return_token();
             addOp = parseAddOp();
             termA = parseTermA();
             simpleExpr = parseSimpleExpr();
             return std::make_unique<SimpleExpr>(std::move(addOp), std::move(termA), std::move(simpleExpr));
         default:
-            returnToken();
+            return_token();
             return std::make_unique<SimpleExpr>();
     }
 }
@@ -196,7 +215,7 @@ std::unique_ptr<Expression> SyntaticAnalyzer::parseExpression() {
     std::unique_ptr<RelOp> relOp;
     std::unique_ptr<SimpleExprA> simpleExprB;
 
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     switch (token->token_type) {
         case Token::COMP_EQ:
@@ -205,18 +224,18 @@ std::unique_ptr<Expression> SyntaticAnalyzer::parseExpression() {
         case Token::COMP_LT:
         case Token::COMP_GE:
         case Token::COMP_LE:
-            returnToken();
+            return_token();
             relOp = parseRelOp();
             simpleExprB = parseSimpleExprA();
             return std::make_unique<Expression>(std::move(simpleExprA), std::move(relOp), std::move(simpleExprB));
         default:
-            returnToken();
+            return_token();
             return std::make_unique<Expression>(std::move(simpleExprA));
     }
 }
 
 std::unique_ptr<Writable> SyntaticAnalyzer::parseWritable() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     switch (token->token_type) {
         case Token::CONST_STRING:
@@ -228,63 +247,71 @@ std::unique_ptr<Writable> SyntaticAnalyzer::parseWritable() {
         case Token::CONST_INT:
         case Token::CONST_FLOAT:
         case Token::CONST_CHAR:
-            returnToken();
+            return_token();
             return std::make_unique<Writable>(parseSimpleExprA());
         default:
-            printError();
+            print_error();
+            eat_until(Writable::follow);
             return nullptr;
     }
 }
 
 std::unique_ptr<WriteStmt> SyntaticAnalyzer::parseWriteStmt() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::WRITE) {
-        printError();
+        print_error();
+        eat_until(WriteStmt::follow);
         return nullptr;
     }
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::OPEN_BRACES) {
-        printError();
+        print_error();
+        eat_until(WriteStmt::follow);
         return nullptr;
     }
 
     std::unique_ptr<WriteStmt> writeStmt = std::make_unique<WriteStmt>(parseWritable());
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::CLOSE_BRACES) {
-        printError();
+        print_error();
+        eat_until(WriteStmt::follow);
     }
 
     return writeStmt;
 }
 
 std::unique_ptr<ReadStmt> SyntaticAnalyzer::parseReadStmt() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::READ) {
-        printError();
+        print_error();
+        eat_until(ReadStmt::follow);
         return nullptr;
     }
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::OPEN_BRACES) {
-        printError();
+        print_error();
+        eat_until(ReadStmt::follow);
         return nullptr;
     }
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::ID) {
-        printError();
+        print_error();
+        eat_until(ReadStmt::follow);
         return nullptr;
     }
 
     std::unique_ptr<ReadStmt> readStmt = std::make_unique<ReadStmt>((TokenId*) token);
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::CLOSE_BRACES) {
-        printError();
+        print_error();
+        eat_until(ReadStmt::follow);
         return nullptr;
     }
 
@@ -292,18 +319,20 @@ std::unique_ptr<ReadStmt> SyntaticAnalyzer::parseReadStmt() {
 }
 
 std::unique_ptr<StmtPrefix> SyntaticAnalyzer::parseStmtPrefix() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::WHILE) {
-        printError();
+        print_error();
+        eat_until(StmtPrefix::follow);
         return nullptr;
     }
 
     std::unique_ptr<Condition> condition = parseCondition();
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::DO) {
-        printError();
+        print_error();
+        eat_until(StmtPrefix::follow);
         return nullptr;
     }
 
@@ -314,9 +343,10 @@ std::unique_ptr<WhileStmt> SyntaticAnalyzer::parseWhileStmt() {
     std::unique_ptr<StmtPrefix> stmtPrefix = parseStmtPrefix();
     std::unique_ptr<StmtList> stmtList = parseStmtList();
 
-    Token* token = getNextToken();
+    Token* token = get_next_token();
     if (token->token_type != Token::END) {
-        printError();
+        print_error();
+        eat_until(WhileStmt::follow);
         return nullptr;
     }
 
@@ -324,10 +354,11 @@ std::unique_ptr<WhileStmt> SyntaticAnalyzer::parseWhileStmt() {
 }
 
 std::unique_ptr<StmtSuffix> SyntaticAnalyzer::parseStmtSuffix() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::UNTIL) {
-        printError();
+        print_error();
+        eat_until(StmtSuffix::follow);
         return nullptr;
     }
 
@@ -335,10 +366,11 @@ std::unique_ptr<StmtSuffix> SyntaticAnalyzer::parseStmtSuffix() {
 }
 
 std::unique_ptr<RepeatStmt> SyntaticAnalyzer::parseRepeatStmt() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::REPEAT) {
-        printError();
+        print_error();
+        eat_until(RepeatStmt::follow);
         return nullptr;
     }
 
@@ -353,56 +385,62 @@ std::unique_ptr<Condition> SyntaticAnalyzer::parseCondition() {
 }
 
 std::unique_ptr<IfStmt> SyntaticAnalyzer::parseIfStmt() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::IF) {
-        printError();
+        print_error();
+        eat_until(IfStmt::follow);
         return nullptr;
     }
 
     std::unique_ptr<Condition> condition = parseCondition();
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::THEN) {
-        printError();
+        print_error();
+        eat_until(IfStmt::follow);
         return nullptr;
     }
 
     std::unique_ptr<StmtList> ifStmt = parseStmtList();
     std::unique_ptr<StmtList> elseStmt;
 
-    token = getNextToken();
+    token = get_next_token();
     switch (token->token_type) {
         case Token::END:
             return std::make_unique<IfStmt>(std::move(condition), std::move(ifStmt));
         case Token::ELSE:
             elseStmt = parseStmtList();
-            token = getNextToken();
+            token = get_next_token();
             if (token->token_type != Token::END) {
-                printError();
+                print_error();
+                eat_until(IfStmt::follow);
                 return nullptr;
             }
             return std::make_unique<IfStmt>(std::move(condition), std::move(ifStmt), std::move(elseStmt));        
         default:
-            printError();
+            print_error();
+            eat_until(IfStmt::follow);
             return nullptr;
     }
 }
 
 std::unique_ptr<AssignStmt> SyntaticAnalyzer::parseAssignStmt() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
 
     if (token->token_type != Token::ID) {
-        printError();
+        print_error();
+        eat_until(AssignStmt::follow);
         return nullptr;
     }
 
     TokenId* id= (TokenId*) token;
 
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::ASSIGN) {
-        printError();
+        print_error();
+        eat_until(AssignStmt::follow);
         return nullptr;
     }
    
@@ -410,8 +448,8 @@ std::unique_ptr<AssignStmt> SyntaticAnalyzer::parseAssignStmt() {
 }
 
 std::unique_ptr<Stmt> SyntaticAnalyzer::parseStmt() {
-    Token* token = getNextToken();
-    returnToken();
+    Token* token = get_next_token();
+    return_token();
     switch (token->token_type) {
         case Token::ID:
             return std::make_unique<Stmt>(parseAssignStmt());
@@ -426,7 +464,8 @@ std::unique_ptr<Stmt> SyntaticAnalyzer::parseStmt() {
         case Token::REPEAT:
             return std::make_unique<Stmt>(parseRepeatStmt());        
         default:
-            printError();
+            print_error();
+            eat_until(Stmt::follow);
             return nullptr;
     }
 }
@@ -436,18 +475,18 @@ std::unique_ptr<StmtList> SyntaticAnalyzer::parseStmtList() {
 
     stmtList.push_back(parseStmt());
 
-    Token* token = getNextToken();
+    Token* token = get_next_token();
     while (token->token_type == Token::SEMICOLON) {
         stmtList.push_back(parseStmt());
-        token = getNextToken();
+        token = get_next_token();
     }
-    returnToken();
+    return_token();
 
     return std::make_unique<StmtList>(std::move(stmtList));
 }
 
 std::unique_ptr<Type> SyntaticAnalyzer::parseType() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     switch (token->token_type) {
         case Token::INT:
@@ -457,7 +496,8 @@ std::unique_ptr<Type> SyntaticAnalyzer::parseType() {
         case Token::CHAR:
             return std::make_unique<Type>(Type::CHAR);
         default:
-            printError();
+            print_error();
+            eat_until(Type::follow);
             return nullptr;
     }
 }
@@ -465,26 +505,28 @@ std::unique_ptr<Type> SyntaticAnalyzer::parseType() {
 std::unique_ptr<IdentList> SyntaticAnalyzer::parseIdentList() {
     std::list<TokenId*> identList;
 
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::ID) {
-        printError();
+        print_error();
+        eat_until(IdentList::follow);
         return nullptr;
     }
     
     identList.push_back((TokenId*) token);
 
-    token = getNextToken();
+    token = get_next_token();
     while (token->token_type == Token::COMMA) {
-        token = getNextToken();
+        token = get_next_token();
         if (token->token_type != Token::ID) {
-            printError();
+            print_error();
+            eat_until(IdentList::follow);
             return nullptr;
         }
         identList.push_back((TokenId*) token);
-        token = getNextToken();
+        token = get_next_token();
     }
-    returnToken();
+    return_token();
 
     return std::make_unique<IdentList>(std::move(identList));
 }
@@ -499,62 +541,67 @@ std::unique_ptr<Decl> SyntaticAnalyzer::parseDecl() {
 std::unique_ptr<DeclList> SyntaticAnalyzer::parseDeclList() {
     std::list<std::unique_ptr<Decl>> declList;
 
-    Token* token = getNextToken();
+    Token* token = get_next_token();
     if (token->token_type != Token::DECLARE) {
-        printError();
+        print_error();
+        eat_until(DeclList::follow);
         return nullptr;
     }
 
     declList.push_back(parseDecl());
     
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::SEMICOLON) {
-        printError();
+        print_error();
+        eat_until(DeclList::follow);
         return nullptr;
     }
 
-    token = getNextToken();
+    token = get_next_token();
     while (true) {
         switch (token->token_type) {
             case Token::INT:
             case Token::FLOAT:
             case Token::CHAR:
-                returnToken();
+                return_token();
                 declList.push_back(parseDecl());
                 break;
             default:
-                returnToken();
+                return_token();
                 return std::make_unique<DeclList>(std::move(declList));
         }
 
-        token = getNextToken();
+        token = get_next_token();
         if (token->token_type != Token::SEMICOLON) {
-            printError();
+            print_error();
+            eat_until(DeclList::follow);
             return nullptr;
         }
 
-        token = getNextToken();
+        token = get_next_token();
     }
 }
 
 std::unique_ptr<Body> SyntaticAnalyzer::parseBody() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
 
     if (token->token_type != Token::BEGIN) {
-        returnToken();
+        return_token();
         std::unique_ptr<DeclList> declList = parseDeclList();
         
-        token = getNextToken();
+        token = get_next_token();
         if (token->token_type != Token::BEGIN) {
-            printError();
+            print_error();
+            eat_until(Body::follow);
             return nullptr;
         }
 
         std::unique_ptr<StmtList> stmtList = parseStmtList();
-        token = getNextToken();
+        token = get_next_token();
         if (token->token_type != Token::END) {
-            printError();
+            print_error();
+            eat_until(Body::follow);
             return nullptr;
         }
 
@@ -562,9 +609,10 @@ std::unique_ptr<Body> SyntaticAnalyzer::parseBody() {
     }
 
     std::unique_ptr<StmtList> stmtList = parseStmtList();
-    token = getNextToken();
+    token = get_next_token();
     if (token->token_type != Token::END) {
-        printError();
+        print_error();
+        eat_until(Body::follow);
         return nullptr;
     }
 
@@ -572,10 +620,11 @@ std::unique_ptr<Body> SyntaticAnalyzer::parseBody() {
 }
 
 std::unique_ptr<Program> SyntaticAnalyzer::parseProgram() {
-    Token* token = getNextToken();
+    Token* token = get_next_token();
 
     if (token->token_type != Token::ROUTINE) {
-        printError();
+        print_error();
+        eat_until(Program::follow);
         return nullptr;
     }
 

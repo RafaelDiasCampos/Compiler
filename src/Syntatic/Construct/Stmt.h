@@ -27,6 +27,8 @@ public:
     Stmt(std::unique_ptr<ReadStmt> readStmt) : statementType(Read), readStmt(std::move(readStmt)) {}
     Stmt(std::unique_ptr<WriteStmt> writeStmt) : statementType(Write), writeStmt(std::move(writeStmt)) {}
     ~Stmt() {}
+
+    static const std::list<Token::TokenType> follow;
 private:
     StatementType statementType;
     std::unique_ptr<AssignStmt> assignStmt;
@@ -36,3 +38,5 @@ private:
     std::unique_ptr<ReadStmt> readStmt;
     std::unique_ptr<WriteStmt> writeStmt;
 };
+
+inline const std::list<Token::TokenType> Stmt::follow = {Token::END, Token::ELSE, Token::UNTIL};

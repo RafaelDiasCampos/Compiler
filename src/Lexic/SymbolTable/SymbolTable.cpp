@@ -4,7 +4,7 @@ SymbolTable::SymbolTable() {
 
 }
 
-Token*  SymbolTable::insertSymbol(std::string id, std::unique_ptr<Token> token) {
+Token*  SymbolTable::insert_symbol(std::string id, std::unique_ptr<Token> token) {
     std::pair<SymbolTableIt, bool> result = table.insert({id, std::move(token)});
 
     Token* tokenInserted = result.first->second.get();
@@ -12,10 +12,10 @@ Token*  SymbolTable::insertSymbol(std::string id, std::unique_ptr<Token> token) 
     return tokenInserted;
 }
 
-Token* SymbolTable::insertId(std::string id) {
+Token* SymbolTable::insert_id(std::string id) {
     std::unique_ptr<Token> token = std::make_unique<TokenId>(TokenId(id));
 
-    Token* tokenInserted = insertSymbol(id, std::move(token));
+    Token* tokenInserted = insert_symbol(id, std::move(token));
 
     return tokenInserted;
 }

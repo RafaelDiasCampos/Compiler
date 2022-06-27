@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm>
 #include "../Lexic/Lexic.h"
 #include "../Syntatic/Construct/Program.h"
 
@@ -11,14 +12,17 @@ class SyntaticAnalyzer {
 
     std::unique_ptr<Program> parseProgram();
 
+    bool has_error = false;
+
     private:
     LexicAnalyzer lexic;
     Token* token_read;
     bool returned_token = false;
 
-    Token* getNextToken();
-    void returnToken();
-    void printError();
+    Token* get_next_token();
+    void return_token();
+    void print_error();
+    void eat_until(std::list<Token::TokenType> tokens);
     
     std::unique_ptr<Body> parseBody();
     std::unique_ptr<DeclList> parseDeclList();

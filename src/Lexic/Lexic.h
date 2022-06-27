@@ -19,19 +19,19 @@ class LexicAnalyzer {
     LexicAnalyzer(std::string filename);
     ~LexicAnalyzer() {}
 
-    Token* getNextToken();
+    Token* get_next_token();
 
-    const FilePosition getFilePosition() const;
+    const FilePosition get_file_position() const;
 
     const std::string to_string() const;
 
     private:
-    void createBasicTokens();
+    void create_basic_tokens();
     void initializeSymbolTable();
 
-    Token* parseNumericConst();
-    Token* parseStringConst();
-    Token* parseIdentifier();
+    Token* parse_numeric_const();
+    Token* parse_string_const();
+    Token* parse_identifier();
     
     FileHandler handler;
     SymbolTable table;

@@ -9,7 +9,7 @@ FileHandler::FileHandler(std::string filename) {
     }
 }
 
-bool FileHandler::getNextChar(char &c) {
+bool FileHandler::get_next_char(char &c) {
     file.get(last_read);
 
     c = last_read;
@@ -33,6 +33,6 @@ void FileHandler::putback() {
     }
 }
 
-const FilePosition FileHandler::getFilePosition() const {
+const FilePosition FileHandler::get_file_position() const {
     return file_position;
 }

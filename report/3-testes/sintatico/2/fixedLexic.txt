@@ -1,0 +1,2 @@
+Error: Unexpected token at position (3, 4)
+Error: Unexpected token at position (11, 8)

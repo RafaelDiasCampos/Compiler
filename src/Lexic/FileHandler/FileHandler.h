@@ -23,10 +23,10 @@ class FileHandler {
     FileHandler(std::string filename);
     ~FileHandler() {}
 
-    bool getNextChar(char &c);
+    bool get_next_char(char &c);
     void putback();
 
-    const FilePosition getFilePosition() const;
+    const FilePosition get_file_position() const;
 
     private:
     std::ifstream file;

@@ -2,6 +2,7 @@
 \label{cap:sintatico}
 
 \section{Alteração na Gramática}
+\label{sec:sintaticoAlteracaoGramatica}
 A gramática original apresenta recursão a esquerda, o que impossibilita a construção de um parser recursivo descendente que a reconheça.
 Por isso, foi feita a seguinte modificação na gramática para eliminar essa recursão:
 
@@ -69,6 +70,7 @@ Por isso, foi feita a seguinte modificação na gramática para eliminar essa re
     \end{grammar}
 
 \section{Calculo de First e Follow}
+\label{sec:sintaticoFirstFollow}
 
 Para ajudar na implementação do compilador, foi realizad o cálculo do First e Follow para cada não-terminal da gramática:
 
@@ -140,6 +142,7 @@ Para ajudar na implementação do compilador, foi realizad o cálculo do First e
     \end{itemize}
     
 \section{Estrutura do Programa}
+\label{sec:sintaticoEstrutura}
 Foi feita implementação de um Parser Recursivo Descendente para reconhecer a gramática da linguagem tilizando o algoritmo de parsing LL(1) .
 
 Cada regra da gramática foi representada por uma classe que herda de \textbf{Construct}.
@@ -149,3 +152,148 @@ Essas regras recebem como parâmetros objetos do tipo \textbf{Token} ou do tipo 
 Para recuperar os erros de sintaxe, foi utilizado o método baseado na análise do Follow de cada regra da gramática.
 Ao encontrar um erro na construção de uma regra, o programa "come"  novos Tokens até encontrar um que pertence ao Follow da regra que estava sendo construída.
 Dessa forma, é garantido que pelo menos o início da construção da regra seguinte será possível, o que permite um reconhecimento maior de erros.
+
+
+\section{Testes de validação}
+\label{sec:sintaticoTestes}
+
+\subsection{Teste 01}
+\label{subsec:sintaticoTeste01}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/1/original.txt}
+
+Saida do Compilador:
+
+\verbatiminput{3-testes/sintatico/1/original.txt}
+
+\subsubsection{Código Original Corrigido}
+\verbatiminput{../tests/1/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+\verbatiminput{3-testes/sintatico/1/fixedSyntatic.txt}
+
+\subsection{Teste 02}
+\label{subsec:sintaticoTeste02}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/2/fixedLexic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/2/fixedLexic.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/2/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/2/fixedSyntatic.txt}
+
+\subsection{Teste 03}
+\label{subsec:sintaticoTeste03}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/3/original.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/3/original.txt}
+\subsection{Teste 04}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/3/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/3/fixedSyntatic.txt}
+
+\subsection{Teste 04}
+\label{subsec:sintaticoTeste04}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/4/fixedLexic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/4/fixedLexic.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/4/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/4/fixedSyntatic.txt}
+
+\subsection{Teste 05}
+\label{subsec:sintaticoTeste05}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/5/fixedLexic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/5/fixedLexic.txt}
+
+\subsubsection{Código com Token Routine}
+\verbatiminput{../tests/5/fixedRoutine.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/5/fixedRoutine.txt}
+
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/5/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/5/fixedSyntatic.txt}
+
+\subsection{Teste 06}
+\label{subsec:sintaticoTeste06}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/6/fixedLexic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/6/fixedLexic.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/6/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/6/fixedSyntatic.txt}
+
+\subsection{Teste 07}
+\label{subsec:sintaticoTeste07}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/7/fixedLexic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/7/fixedLexic.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/7/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/sintatico/7/fixedSyntatic.txt}
