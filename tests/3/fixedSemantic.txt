@@ -2,7 +2,7 @@ routine
 
 declare
 
-float a, b, aux;
+int a, b, aux;
 
 begin
 

@@ -1,2 +1,155 @@
 \chapter{Analisador Semântico}
 \label{cap:semantico}
+
+\section{Regras Semânticas}
+\label{sec:semanticoRegras}
+Foram implementadas as seguintes regras semânticas:
+
+\begin{itemize}
+\item \textbf{Regra 1}: Variáveis devem ser declaradas antes de serem utilizadas.
+\item \textbf{Regra 2}: Variáveis somente podem ser declaradas uma única vez.
+\item \textbf{Regra 3}: Variáveis do tipo \textbf{float} pode receber valores do tipo \textbf{int}, entretanto o inverso não é permitido.
+\item \textbf{Regra 4}: Resultados de divisão devem ser do tipo \textbf{float}.
+
+\end{itemize}
+
+\section{Estrutura do Programa}
+\label{sec:semanticoEstrutura}
+Para o analisador Semântico, as regras foram implementadas junto com o código do Analisador Sintático.
+Com isso, assim que uma construção é analisada pelo Analisador Sintático, ela é passada para o Analisador Semântico.
+
+\section{Testes de validação}
+
+\section{Testes de validação}
+\label{sec:semanticoTestes}
+
+\subsection{Teste 01}
+\label{subsec:semanticoTeste01}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/1/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+\verbatiminput{3-testes/semantico/1/fixedSyntatic.txt}
+
+\subsubsection{Código com declaração corrigida}
+\verbatiminput{../tests/1/fixedSemanticDeclaration.txt}
+
+Saida do Compilador:
+
+\verbatiminput{3-testes/semantico/1/fixedSemanticDeclaration.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/1/fixedSemantic.txt}
+
+Saida do Compilador:
+
+\verbatiminput{3-testes/semantico/1/fixedSemantic.txt}
+
+\subsection{Teste 02}
+\label{subsec:semanticoTeste02}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/2/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/2/fixedSyntatic.txt}
+
+
+\subsubsection{Código com declaração corrigida}
+\verbatiminput{../tests/2/fixedSemanticDeclaration.txt}
+
+Saida do Compilador:
+
+\verbatiminput{3-testes/semantico/2/fixedSemanticDeclaration.txt}
+
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/2/fixedSemantic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/2/fixedSemantic.txt}
+
+\subsection{Teste 03}
+\label{subsec:semanticoTeste03}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/3/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/3/fixedSyntatic.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/3/fixedSemantic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/3/fixedSemantic.txt}
+
+\subsection{Teste 04}
+\label{subsec:semanticoTeste04}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/4/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/4/fixedSyntatic.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/4/fixedSemantic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/4/fixedSemantic.txt}
+
+\subsection{Teste 05}
+\label{subsec:semanticoTeste05}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/5/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/5/fixedSyntatic.txt}
+
+\subsection{Teste 06}
+\label{subsec:semanticoTeste06}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/6/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/6/fixedSyntatic.txt}
+
+\subsection{Teste 07}
+\label{subsec:semanticoTeste07}
+
+\subsubsection{Código Original}
+\verbatiminput{../tests/7/fixedSyntatic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/7/fixedSyntatic.txt}
+
+\subsubsection{Código Corrigido}
+\verbatiminput{../tests/7/fixedSemantic.txt}
+
+Saida do Compilador:
+
+
+\verbatiminput{3-testes/semantico/7/fixedSemantic.txt}

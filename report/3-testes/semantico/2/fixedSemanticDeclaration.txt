@@ -1,0 +1,2 @@
+Error: Incompatible types at position (12, 23)
+Error: Incompatible types at position (15, 20)

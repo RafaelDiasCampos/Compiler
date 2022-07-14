@@ -1,0 +1,4 @@
+Error: Incompatible types at position (10, 23)
+Error: Undeclared Variable at position (11, 24)
+Error: Undeclared Variable at position (21, 51)
+Error: Incompatible types at position (22, 38)

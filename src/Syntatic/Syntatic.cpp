@@ -81,6 +81,7 @@ std::unique_ptr<MulOp> SyntaticAnalyzer::parseMulOp() {
             break;
         case Token::DIV:
             mulOp = std::make_unique<MulOp>(MulOp::DIV);
+            semanticType = Constant::FLOAT;
             break;
         case Token::AND:
             mulOp = std::make_unique<MulOp>(MulOp::AND);
@@ -274,10 +275,13 @@ std::unique_ptr<Term> SyntaticAnalyzer::parseTerm() {
             mulOp = parseMulOp();
             factorA = parseFactorA();
             term_recur = parseTerm();
-
+            
             semanticType = construct_type(term_recur.get(), factorA.get());
-            if (semanticType == Constant::ERROR) {
+            if (semanticType == Constant::ERROR && term_recur->semanticType != Constant::ERROR && factorA->semanticType != Constant::ERROR) {
                 print_error("Incompatible types");
+            }
+            else if (mulOp->semanticType == Constant::FLOAT) {
+                semanticType = Constant::FLOAT;
             }
 
             term = std::make_unique<Term>(std::move(mulOp), std::move(factorA), std::move(term_recur));
@@ -302,7 +306,7 @@ std::unique_ptr<TermA> SyntaticAnalyzer::parseTermA() {
     term  = parseTerm();
     
     semanticType = construct_type(term.get(), factorA.get());
-    if (semanticType == Constant::ERROR) {
+    if (semanticType == Constant::ERROR && term->semanticType != Constant::ERROR && factorA->semanticType != Constant::ERROR) {
         print_error("Incompatible types");
     }
 
@@ -330,7 +334,7 @@ std::unique_ptr<SimpleExpr> SyntaticAnalyzer::parseSimpleExpr() {
             simpleExpr_recur = parseSimpleExpr();
 
             semanticType = construct_type(termA.get(), simpleExpr_recur.get());
-            if (semanticType == Constant::ERROR) {
+            if (semanticType == Constant::ERROR && termA->semanticType != Constant::ERROR && simpleExpr_recur->semanticType != Constant::ERROR) {
                 print_error("Incompatible types");
             }
             simpleExpr = std::make_unique<SimpleExpr>(std::move(addOp), std::move(termA), std::move(simpleExpr_recur));
@@ -355,7 +359,7 @@ std::unique_ptr<SimpleExprA> SyntaticAnalyzer::parseSimpleExprA() {
     simpleExpr = parseSimpleExpr();
     
     semanticType = construct_type(termA.get(), simpleExpr.get());
-    if (semanticType == Constant::ERROR) {
+    if (semanticType == Constant::ERROR && termA->semanticType != Constant::ERROR && simpleExpr->semanticType != Constant::ERROR) {
         print_error("Incompatible types");
     }
 
@@ -386,7 +390,7 @@ std::unique_ptr<Expression> SyntaticAnalyzer::parseExpression() {
             simpleExprB = parseSimpleExprA();
 
             semanticType = construct_type(simpleExprA.get(), simpleExprB.get());
-            if (semanticType == Constant::ERROR) {
+            if (semanticType == Constant::ERROR && simpleExprA->semanticType != Constant::ERROR && simpleExprB->semanticType != Constant::ERROR) {
                 print_error("Incompatible types");
             }
             expression = std::make_unique<Expression>(std::move(simpleExprA), std::move(relOp), std::move(simpleExprB));
@@ -729,8 +733,10 @@ std::unique_ptr<AssignStmt> SyntaticAnalyzer::parseAssignStmt() {
     simpleExprA = parseSimpleExprA();
     semanticType = simpleExprA->semanticType;
 
-    
-    if (id->declared) {
+    if (simpleExprA->semanticType == Construct::ERROR) {
+        semanticType = Construct::ERROR;
+    }
+    else if (id->declared) {
         switch (id->value->token_type) {
             case Token::CONST_INT:
                 if (simpleExprA->semanticType != Construct::INT) {
@@ -1092,33 +1098,50 @@ std::unique_ptr<Program> SyntaticAnalyzer::parseProgram() {
 }
 
 Construct::ConstructType SyntaticAnalyzer::construct_type(Construct* constructA, Construct* constructB) {
-    if (constructA->semanticType == Construct::ERROR || constructB->semanticType == Construct::ERROR) {
-        return Construct::VOID;
+    if (constructA->semanticType == Constant::ERROR || constructB->semanticType == Constant::ERROR) {
+        return Constant::ERROR;
+    }
+
+    if (constructA->semanticType == Constant::VOID) {
+        return constructB->semanticType;
+    }
+    if (constructB->semanticType == Constant::VOID) {
+        return constructA->semanticType;
     }
 
     switch (constructA->semanticType) {
         case Constant::INT:
-            if (constructB->semanticType != Constant::INT && constructB->semanticType != Constant::VOID) {
+            if (constructB->semanticType == Constant::INT) {
+                return Constant::INT;
+            }
+            else if (constructB->semanticType == Constant::FLOAT) {
+                return Constant::FLOAT;
+            }
+            else {
                 return Constant::ERROR;
             }
-            return Constant::INT;
             break;
         case Constant::FLOAT:
-            if (constructB->semanticType != Constant::INT && constructB->semanticType != Constant::FLOAT && constructB->semanticType != Constant::VOID) {
+            if (constructB->semanticType == Constant::INT) {
+                return Constant::FLOAT;
+            }
+            else if (constructB->semanticType == Constant::FLOAT) {
+                return Constant::FLOAT;
+            }
+            else {
                 return Constant::ERROR;
             }
-            return Constant::FLOAT;
             break;
         case Constant::CHAR:
-            if (constructB->semanticType != Constant::CHAR && constructB->semanticType != Constant::VOID) {
+            if (constructB->semanticType == Constant::CHAR) {
+                return Constant::CHAR;
+            }
+            else {
                 return Constant::ERROR;
             }
-            return Constant::CHAR;
             break;
         default:
-            return constructB->semanticType;
+            return Constant::ERROR;
             break;
     }
-
-    return Construct::ERROR;
 }

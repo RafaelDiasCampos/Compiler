@@ -3,7 +3,8 @@ routine
 declare
 
 int a, b, c;
-float x, result;
+int result;
+float x;
 
 begin
 
