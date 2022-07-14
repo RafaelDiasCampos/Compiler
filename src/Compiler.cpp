@@ -6,7 +6,7 @@ void testSyntatic(std::string filename){
 
     std::unique_ptr<Program> program = synt.parseProgram();
 
-    if (!synt.has_error) {
+    if (program->semanticType == Construct::VOID) {
         std::cout << "Compilation successful!" << std::endl;
     }
 }

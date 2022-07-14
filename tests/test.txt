@@ -1,1 +1,7 @@
-23.42
+routine
+
+begin
+
+write ("Resultado: ")
+
+end

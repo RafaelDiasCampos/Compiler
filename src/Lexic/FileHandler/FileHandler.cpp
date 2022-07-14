@@ -5,7 +5,7 @@ FileHandler::FileHandler(std::string filename) {
     file = std::ifstream(filename);
 
     if (!file.is_open()) {
-        throw "Error while oepening file";
+        throw std::runtime_error("File not found");
     }
 }
 

@@ -9,6 +9,7 @@ class TokenId : public Token {
     virtual const std::string to_string() const;
 
     std::unique_ptr<ValueType> value;
+    bool declared = false;
 
     private:
     const std::string id;

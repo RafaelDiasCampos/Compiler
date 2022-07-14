@@ -12,8 +12,6 @@ class SyntaticAnalyzer {
 
     std::unique_ptr<Program> parseProgram();
 
-    bool has_error = false;
-
     private:
     LexicAnalyzer lexic;
     Token* token_read;
@@ -22,7 +20,10 @@ class SyntaticAnalyzer {
     Token* get_next_token();
     void return_token();
     void print_error();
+    void print_error(std::string message);
     void eat_until(std::list<Token::TokenType> tokens);
+
+    Construct::ConstructType construct_type(Construct* constructA, Construct* constructB);
     
     std::unique_ptr<Body> parseBody();
     std::unique_ptr<DeclList> parseDeclList();
