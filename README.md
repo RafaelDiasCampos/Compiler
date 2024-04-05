@@ -1,5 +1,5 @@
-# Compiler
-This is a compiler for a simple programming language. This language was created as the final project of the Compilers subject at the CEFET-MG University, Brazil, taken in the the first semester of the year of 2022.
+# EasyComp Compiler
+This is a compiler for a simple made-up programming language "EasyComp". This language was created as the final project of the Compilers subject at the CEFET-MG University, Brazil, taken in the the first semester of the year of 2022.
 
 <br>
 
